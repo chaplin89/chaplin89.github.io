@@ -1,0 +1,46 @@
+# Site settings
+title_left    : "chaplin"
+title_right   : "space"
+description   : "Blog about hacking and other nasty things."
+keywords      : "hacking, reverse-engineering, coding, programming, hardware, firmware"
+url           : https://www.chaplinspace.com
+baseurl       : ""
+cover         : "" # image uri like logo/cover image for site seo
+
+google_analytics  : UA-141216446-1
+twitter_username  : "chaplinspace"
+comments_enabled  : true # if enabled (set to true), please provide your disqus_username
+disqus_shortname  : "chaplin89-github-io"
+postshare_enabled : true
+
+# Build settings
+permalink   : /:year/:title/
+markdown    : kramdown
+highlighter : rouge
+
+source      : ./
+destination : ./_site
+
+# Sass configuration
+sass:
+  sass_dir  : assets/scss
+  style     : compressed
+
+# Author settings
+author:
+  name     : "chaplin89"
+
+plugins:
+  - jekyll-sitemap
+  - bourbon
+  - jekyll-paginate
+  - jekyll-toc
+
+# navbar pages
+navbar:
+  - slug : about
+    title: About
+  - slug : blog
+    title: Blog
+
+exclude: ["gulp", "node_modules", "bower", "bower_components", "config.rb", "src", "Gemfile", "Gemfile.lock", ".rvmrc", ".rbenv-version", "package.json", "gulpfile.js", "README.md", "Rakefile", "changelog.md", "script", "vendor"]
