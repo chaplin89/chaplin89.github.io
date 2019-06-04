@@ -126,6 +126,17 @@ hr {
   }
 }
 
+@media only screen and (max-width:400px) {
+  .navbar {
+    width:100%;
+    float: left;
+    align-content: center;
+  }
+  .site-header {
+    min-height: 110px;
+  }
+}
+
 .category-title {
   margin: 1em 0 0.5em 0;
 
