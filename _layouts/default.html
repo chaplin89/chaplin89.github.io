@@ -6,11 +6,15 @@ published: true
 <html>
   {% include head.html %}
   <body>
-    <main class="wrapper">
+    <div class="bb">
+    <div class="left">
       {% include header.html %}
+    </div>
+    <main class="wrapper">
       {{ content }}
       {% include footer.html %}
     </main>
+  </div>
     {% include foot.html %}
   </body>
 </html>
