@@ -5,8 +5,8 @@
     <description>Blog about hacking and other nasty things.</description>
     <link>https://www.chaplinspace.com/</link>
     <atom:link href="https://www.chaplinspace.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 04 Jun 2019 23:36:41 +0200</pubDate>
-    <lastBuildDate>Tue, 04 Jun 2019 23:36:41 +0200</lastBuildDate>
+    <pubDate>Wed, 05 Jun 2019 13:03:41 +0200</pubDate>
+    <lastBuildDate>Wed, 05 Jun 2019 13:03:41 +0200</lastBuildDate>
     <generator>Jekyll v3.8.5</generator>
     
       <item>
@@ -18,20 +18,20 @@
 &lt;hr /&gt;
 
 &lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;
-&lt;p&gt;In this post I’m trying to put together some information that can be useful to a person that is trying to hack a car. It comes without the promise to be complete or correct, as I’m nowhere near to be considered a car hacking expert. What follow is just a collection of question I had while I was approaching to this world and my attempt to provide an answer to said questions.&lt;/p&gt;
+&lt;p&gt;In this post, I’m trying to put together some information that can be useful to a person that is trying to hack a car. It comes without the promise to be complete or correct, as I’m nowhere near to be considered a car hacking expert. What follows is just a collection of questions I had while I was approaching this world and my attempt to provide an answer to said questions.&lt;/p&gt;
 
 &lt;h1 id=&quot;where-to-start&quot;&gt;Where to start?&lt;/h1&gt;
-&lt;p&gt;There are different ways to interface with a car that differs on complexity and cost. One simple way is using the OBD-II port, that is usually found in the driver side of the car.&lt;/p&gt;
+&lt;p&gt;There are different ways to interface with a car that differs on complexity and cost. One simple way is using the OBD-II port, which is usually found in the driver side of the car.&lt;/p&gt;
 
 &lt;h1 id=&quot;whats-obd&quot;&gt;What’s OBD?&lt;/h1&gt;
-&lt;p&gt;OBD stands for on-board-diagnostic. It’s a general term that refers to the self-diagnostic and reporting capabilities of a veichle.&lt;/p&gt;
+&lt;p&gt;OBD stands for on-board-diagnostic. It’s a general term that refers to the self-diagnostic and reporting capabilities of a vehicle.&lt;/p&gt;
 
-&lt;p&gt;There exists different standards related to OBD. The most common nowadays is ODB-II, for car made from ~2000 onwards.&lt;/p&gt;
+&lt;p&gt;There exist different standards related to OBD. The most common nowadays is ODB-II, for cars made from ~2000 onwards.&lt;/p&gt;
 
 &lt;h2 id=&quot;whats-obd-ii&quot;&gt;What’s OBD-II?&lt;/h2&gt;
 &lt;p&gt;OBD-II is a group of ISO/SAE standards that define things like:&lt;/p&gt;
 &lt;ul&gt;
-  &lt;li&gt;the shape of a connector (sometime referred to with the name of the standard, SAE J962)&lt;/li&gt;
+  &lt;li&gt;the shape of a connector (sometimes referred to with the name of the standard, SAE J962)&lt;/li&gt;
   &lt;li&gt;its pinout&lt;/li&gt;
   &lt;li&gt;the format of the message exchanged&lt;/li&gt;
   &lt;li&gt;common “trouble code”&lt;/li&gt;
@@ -49,16 +49,16 @@
   &lt;li&gt;Protocol ID&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;At each service ID are associated several protocol IDs and each combination of service IDs and protocol IDs provide the access to a specific diagnostic information.&lt;/p&gt;
+&lt;p&gt;Each service ID is associated with several protocol IDs and each combination of service IDs and protocol IDs provides access to a piece of specific diagnostic information.&lt;/p&gt;
 
-&lt;p&gt;The protocol allow a device to make a query using a tuple of service ID and protocol ID (encoded in a way that is explained later). On the other side, there should be an OBD-II aware ECU that will respond to the query with the appropriate information.&lt;/p&gt;
+&lt;p&gt;The protocol allows a device to make a query using a tuple of service ID and protocol ID (encoded in a way that is explained later). On the other side, there should be an OBD-II aware ECU that will respond to the query with the appropriate information.&lt;/p&gt;
 
-&lt;p&gt;Some service IDs/protocol IDs are fixed (and public) other are manufacturer specific.&lt;/p&gt;
+&lt;p&gt;Some service IDs/protocol IDs are fixed (and public) others are manufacturer specific.&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/OBD-II_PIDs#Service_02&quot;&gt;Wikipedia&lt;/a&gt; contains an handly list of common service IDs/protocol IDs.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/OBD-II_PIDs#Service_02&quot;&gt;Wikipedia&lt;/a&gt; contains a handy list of common service IDs/protocol IDs.&lt;/p&gt;
 
 &lt;h2 id=&quot;how-data-is-transmitted-over-the-obd-ii-port&quot;&gt;How data is transmitted over the OBD-II port?&lt;/h2&gt;
-&lt;p&gt;While OBD-II specify a common way to retrieve diagnostic information from the car, it provide different choices for the lowest level details of the communication, like what is the layer 1 to use to exchange these messages but it obliges the manufacturers to make this detail public.&lt;/p&gt;
+&lt;p&gt;While OBD-II specifies a common way to retrieve diagnostic information from the car, it provides different choices for the lowest level details of the communication, like what is the layer 1 to use to exchange these messages but it obliges the manufacturers to make this detail public.&lt;/p&gt;
 
 &lt;p&gt;In practice, for cars made after 2006 chances are they are using CAN.&lt;/p&gt;
 
@@ -75,18 +75,17 @@
   &lt;li&gt;16: Vcc&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;Variable pulse width (VPW), Pulse width modulation (PWM), Keyword Protocol (K/L) are usually found on very old car (with some exception, like general motors). As I said, CAN is the most common, hence you’ll end up using only 6-14 pins most of the time.&lt;/p&gt;
+&lt;p&gt;Variable pulse width (VPW), Pulse width modulation (PWM), Keyword Protocol (K/L) are usually found on very old cars (with some exception, like general motors). As I said, CAN is the most common, hence you’ll end up using only 6-14 pins most of the time.&lt;/p&gt;
 
-&lt;p&gt;As for the manufacturer specific pin they are, well, manufacturer specific. Not too much to say here except that sometime connected pins can be found just by seeing the connector.&lt;/p&gt;
+&lt;p&gt;As for the manufacturer specific pin, they are, well, manufacturer specific. Not too much to say here except that sometimes connected pins can be found just by seeing the connector.&lt;/p&gt;
 
-&lt;p&gt;Here is an example of the OBD-II connector in a real car. It’s easy to spot which pin are wired and which are not:&lt;/p&gt;
+&lt;p&gt;Here is an example of the OBD-II connector in a real car. It’s easy to spot which pins are wired and which are not:&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/images/OBDII_REAL.jpg&quot; alt=&quot;OBD-II on a real car&quot; class=&quot;center-image&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;Understanding what’s going on these manufacturer-specific pins is, of course, another story. In some cases a multimeter/oscilloscope can be useful (if you know what’re you looking for), in other cases there can be found online some leaked service manuals of the car.&lt;/p&gt;
+&lt;p&gt;Understanding what’s going on these manufacturer-specific pins is, of course, another story. In some cases a multimeter/oscilloscope can be useful (if you know what’re you looking for), in other cases, there can be found online some leaked service manuals of the car.&lt;/p&gt;
 
-&lt;p&gt;On these pin it can be found, for example, another CAN network.&lt;/p&gt;
-
+&lt;p&gt;On these pins it can be found, for example, another CAN network.&lt;/p&gt;
 &lt;h1 id=&quot;what-is-can&quot;&gt;What is CAN?&lt;/h1&gt;
 &lt;p&gt;When we talk about CAN we are talking about ISO 11898.&lt;/p&gt;
 
@@ -94,23 +93,23 @@
 
 &lt;p&gt;CAN it’s a standard for serial communication made to be tolerant to noises. On its lowest level it uses &lt;a href=&quot;https://en.wikipedia.org/wiki/RS-485&quot;&gt;RS485&lt;/a&gt; but while RS485 regards only the physical layer, CAN specify also the data link layer.&lt;/p&gt;
 
-&lt;p&gt;What follow is a summary of the key concept of can. They can be useful to understand how ECUs and devices communicate, but it’s not mandatory to understand to understand those detail in order to hack a car, as they are normally managed by some kind of adapter (as explained below). Feel free to skip this part.&lt;/p&gt;
+&lt;p&gt;What follows is a summary of the key concept of CAN. They can be useful to understand how ECUs and devices communicate, but it’s not mandatory to understand those detail to hack a car, as they are normally managed by some kind of adapter (as explained below). Feel free to skip this part.&lt;/p&gt;
 
 &lt;h2 id=&quot;1-physical-layer&quot;&gt;1. Physical Layer&lt;/h2&gt;
-&lt;p&gt;As said, for the electrical part CAN is essentialy RS485.&lt;/p&gt;
+&lt;p&gt;As said, for the electrical part CAN is essentially RS485.&lt;/p&gt;
 
 &lt;p&gt;CAN uses 2 wires and differential signaling.
-This means the two signals presents on the wires are complementary, e.g.: if the tension on the first wire drop of 2V, the tension on the second wire surge of 2V. This is shown to have good rejection of noises.&lt;/p&gt;
+This means the two signals present on the wires are complementary, e.g.: if the tension on the first wire drop of 2V, the tension on the second wire surge of 2V. This is shown to have a good rejection of noise.&lt;/p&gt;
 
-&lt;h2 id=&quot;2-data-link-collision-and-priorities&quot;&gt;2. Data link, Collision and priorities&lt;/h2&gt;
+&lt;h2 id=&quot;2-data-link-collision-and-priorities&quot;&gt;2. Data link, Collision, and priorities&lt;/h2&gt;
 &lt;p&gt;Conflicts are managed by introducing the concept of “dominant” (== 0) and “recessive” (== 1) bits.&lt;/p&gt;
 
-&lt;p&gt;Basically, recessive bits are not visibile on the bus if some other device is transmitting a dominant bit at the same time.
-This can be useful both for collision detection and for managing priorities.&lt;/p&gt;
+&lt;p&gt;Recessive bits are not visible on the bus if some other device is transmitting a dominant bit at the same time.
+This can be useful both for collision detection and managing priorities.&lt;/p&gt;
 
-&lt;p&gt;Collision detection is done by probing the channel while transmitting. If the sender is sending a recessive bits but probe a dominant bit, he has the certainty that a collision occured.&lt;/p&gt;
+&lt;p&gt;Collision detection is done by probing the channel while transmitting. If the sender is sending a recessive bit but probe a dominant bit, he has the certainty that a collision occurred.&lt;/p&gt;
 
-&lt;p&gt;Other possible collisions goes unnoticed.&lt;/p&gt;
+&lt;p&gt;Other possible collisions go unnoticed.&lt;/p&gt;
 
 &lt;p&gt;These collisions are:&lt;/p&gt;
 &lt;ul&gt;
@@ -119,9 +118,9 @@ This can be useful both for collision detection and for managing priorities.&lt;
   &lt;li&gt;sending a dominant bit while another device is sending a recessive bit&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;When a device notice a collision it will stop the transmission.&lt;/p&gt;
+&lt;p&gt;When a device notices a collision it will stop the transmission.&lt;/p&gt;
 
-&lt;p&gt;Because of the structure of CAN messages, at the begin of each message there is the transmitter ID. From what was said it can be inferred that sender with a lower ID will have more priority on the bus, as they’ll have an occurrence of a dominant bit earlier in the ID.&lt;/p&gt;
+&lt;p&gt;Because of the structure of CAN messages, at the begin of each message, there is the transmitter ID. From what was said it can be inferred that the sender with a lower ID will have more priority on the bus, as they’ll have an occurrence of a dominant bit earlier in the ID.&lt;/p&gt;
 
 &lt;h2 id=&quot;3-data-link-frames&quot;&gt;3. Data link, Frames&lt;/h2&gt;
 &lt;p&gt;There are 4 kinds of frames specified by the CAN protocol:&lt;/p&gt;
@@ -132,7 +131,7 @@ This can be useful both for collision detection and for managing priorities.&lt;
   &lt;li&gt;&lt;strong&gt;Overload&lt;/strong&gt;: Used to delay a data or a remote frame.&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;p&gt;The format of telegram on the wire is always the same, regardless the frame type:&lt;/p&gt;
+&lt;p&gt;The format of the telegram on the wire is always the same, regardless of the frame type:&lt;/p&gt;
 
 &lt;table&gt;
   &lt;thead&gt;
@@ -166,7 +165,7 @@ This can be useful both for collision detection and for managing priorities.&lt;
     &lt;tr&gt;
       &lt;td&gt;R0&lt;/td&gt;
       &lt;td&gt;1&lt;/td&gt;
-      &lt;td&gt;Reserver&lt;/td&gt;
+      &lt;td&gt;Reserved&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td&gt;DLC&lt;/td&gt;
@@ -191,7 +190,7 @@ This can be useful both for collision detection and for managing priorities.&lt;
     &lt;tr&gt;
       &lt;td&gt;ACK&lt;/td&gt;
       &lt;td&gt;1&lt;/td&gt;
-      &lt;td&gt;Recessive in transmitter, dominant in receivers&lt;/td&gt;
+      &lt;td&gt;Recessive in the transmitter, dominant in receivers&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td&gt;DACK&lt;/td&gt;
@@ -209,62 +208,62 @@ This can be useful both for collision detection and for managing priorities.&lt;
 &lt;h2 id=&quot;how-can-is-used-inside-a-car&quot;&gt;How CAN is used inside a car?&lt;/h2&gt;
 &lt;p&gt;CAN buses are used to connect devices to ECUs and ECUs to other ECUs.&lt;/p&gt;
 
-&lt;p&gt;I guess it’s safe to say that most car has at least 2 different CAN networks: the first, slow and fault-tolerant, is for the “serious” and critical stuff. The second, faster, is for the infotaiment-ish stuff.&lt;/p&gt;
+&lt;p&gt;I guess it’s safe to say that most car has at least 2 different CAN networks: the first, slow and fault-tolerant, is for the “serious” and critical stuff. The second, faster, is for the infotainment-ish stuff.&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;Example of 1st kind of messages: “&lt;strong&gt;Key is inserted&lt;/strong&gt;”, “&lt;strong&gt;Immobilizer is off&lt;/strong&gt;”&lt;/li&gt;
   &lt;li&gt;Example of 2nd kind of messages: “&lt;strong&gt;Air-conditioning is ON&lt;/strong&gt;”, “&lt;strong&gt;Radio is on 98.5MHz&lt;/strong&gt;”&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;For cars that uses CAN At least one of the networks presents inside a car is exposed through OBD-II connector using standard pins 6-14. The ECUs connected on these pins are capable of handling the “OBD-II protocol”, as the whole purpose of the OBD-II port is to provide a common way to access the diagnostic of a car.&lt;/p&gt;
+&lt;p&gt;For cars that use CAN At least one of the networks presents inside a car is exposed through OBD-II connector using standard pins 6-14. The ECUs connected on these pins are capable of handling the “OBD-II protocol”, as the whole purpose of the OBD-II port is to provide a common way to access the diagnostic of a car.&lt;/p&gt;
 
-&lt;p&gt;In some cases even a second CAN bus is exposed using manufacturer specific pins. The messages exchanged on this second network are highly dependent on the manufacturer.&lt;/p&gt;
+&lt;p&gt;In some cases, even a second CAN bus is exposed using manufacturer specific pins. The messages exchanged on this second network are highly dependent on the manufacturer.&lt;/p&gt;
 
 &lt;h2 id=&quot;how-the-obd-ii-protocol-is-encoded-in-a-can-bus&quot;&gt;How the OBD-II protocol is encoded in a CAN bus?&lt;/h2&gt;
-&lt;p&gt;For cars that uses CAN, every request for OBD information is made to the address 0x07DF. In the data field, the first byte identify the service ID, the second byte identify the protocol ID. That’s everything is needed to make an OBD-II query.&lt;/p&gt;
+&lt;p&gt;For cars that use CAN, every request for OBD information is made to the address 0x07DF. In the data field, the first byte identifies the service ID, the second byte identifies the protocol ID. That’s everything that is needed to make an OBD-II query.&lt;/p&gt;
 
-&lt;p&gt;Because there can exists multiple ECUs, the address 0x07DF act as a broadcast address. Every OBD-II aware ECUs will listen to this address and respond to the message using its own ID.&lt;/p&gt;
+&lt;p&gt;Because there can exist multiple ECUs, the address 0x07DF act as a broadcast address. Every OBD-II aware ECUs will listen to this address and respond to the message using its ID.&lt;/p&gt;
 
-&lt;p&gt;The response lenght can vary depending on the information asked.&lt;/p&gt;
+&lt;p&gt;The response length can vary depending on the information asked.&lt;/p&gt;
 
 &lt;h1 id=&quot;which-component-to-use-for-interfacing-with-a-car&quot;&gt;Which component to use for interfacing with a car?&lt;/h1&gt;
-&lt;p&gt;Here we’re getting to the meat and potato of car-hacking. There are different choices depending on what goal you’re trying to achieve. I’ll explore some of them.&lt;/p&gt;
+&lt;p&gt;Here we’re getting to the meat and potato of car-hacking. Different choices are depending on what goal you’re trying to achieve. I’ll explore some of them.&lt;/p&gt;
 
 &lt;h2 id=&quot;all-in-one-obd-ii-to-usbwifibluetooth-adapter&quot;&gt;All-in-one OBD-II to USB/WiFi/Bluetooth adapter&lt;/h2&gt;
-&lt;p&gt;These devices easily allow you to connect with an OBD-II port. At their core they have an OBD-II to RS232 ICs and a WiFi/Bluetooth transceiver or an USB controller.&lt;/p&gt;
+&lt;p&gt;These devices easily allow you to connect with an OBD-II port. At their core, they have an OBD-II to RS232 ICs and a WiFi/Bluetooth transceiver or a USB controller.&lt;/p&gt;
 
-&lt;p&gt;There exists many kind of these devices, but most of them are based on &lt;a href=&quot;https://www.elmelectronics.com/products/ics/obd/&quot;&gt;ELM327&lt;/a&gt; ICs. Even if there exists other OBD-II to RS232 ICs (like the &lt;a href=&quot;https://www.obdsol.com/solutions/chips/stn1110/&quot;&gt;STN1110&lt;/a&gt;, that seems to be also more hacker-friendly), ELM327 is the standard “de-facto” in this field. Other chips try to be compatibile with the ELM327’s AT interface (see below), due to the numerous application that are made for it.&lt;/p&gt;
+&lt;p&gt;There exist many kinds of these devices, but most of them are based on &lt;a href=&quot;https://www.elmelectronics.com/products/ics/obd/&quot;&gt;ELM327&lt;/a&gt; ICs. Even if there exists other OBD-II to RS232 ICs (like the &lt;a href=&quot;https://www.obdsol.com/solutions/chips/stn1110/&quot;&gt;STN1110&lt;/a&gt;, that seems to be also more hacker-friendly), ELM327 is the standard “de-facto” in this field. Other chips try to be compatible with the ELM327’s AT interface (see below), due to the numerous applications that are made for it.&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/ELM327&quot;&gt;ELM327&lt;/a&gt; is basically a PIC microcontroller programmed in a certain way in order to provide an high level interface to the OBD-II protocol. It support every possible protocol specified by OBD-II standards while other ELM32x support only a specific subset.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/ELM327&quot;&gt;ELM327&lt;/a&gt; is a PIC microcontroller programmed in a certain way to provide a high-level interface to the OBD-II protocol. It supports every possible protocol specified by OBD-II standards while other ELM32x support only a specific subset.&lt;/p&gt;
 
 &lt;p&gt;Interacting with ELM327 is done via &lt;a href=&quot;https://en.wikipedia.org/wiki/Hayes_command_set&quot;&gt;AT commands&lt;/a&gt;. The list of possible AT commands supported by ELM327 can be found on the &lt;a href=&quot;https://www.elmelectronics.com/wp-content/uploads/2017/01/ELM327DS.pdf&quot;&gt;manufacturer website&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p&gt;Note that depending on the firmware installed on the device, it may or may not support all the AT commands. ELM Electronic provide a &lt;a href=&quot;https://www.elmelectronics.com/wp-content/uploads/2017/01/AT_Command_Table.pdf&quot;&gt;nice comparison&lt;/a&gt; of feature between versions.&lt;/p&gt;
+&lt;p&gt;Note that depending on the firmware installed on the device, it may or may not support all the AT commands. ELM Electronic provides a &lt;a href=&quot;https://www.elmelectronics.com/wp-content/uploads/2017/01/AT_Command_Table.pdf&quot;&gt;nice comparison&lt;/a&gt; of feature between versions.&lt;/p&gt;
 
-&lt;p&gt;This is a very important thing from the hacker prospective, because some of these feature are &lt;strong&gt;really&lt;/strong&gt; important for your nasty hacking purposes (like sniffing).&lt;/p&gt;
+&lt;p&gt;This is a very important thing from the hacker perspective because some of these features are &lt;strong&gt;really&lt;/strong&gt; important for your nasty hacking purposes (like sniffing).&lt;/p&gt;
 
 &lt;p&gt;Another important thing to consider is that there exists 2 variant of ELM327:&lt;/p&gt;
 &lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Original EML327&lt;/strong&gt;: this is the version made by &lt;a href=&quot;https://www.elmelectronics.com/&quot;&gt;ELM Electronic&lt;/a&gt;, that is an overall nice IC and a very simple way to interact with the OBD-II port.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Crappy chinese ELM327 clone&lt;/strong&gt;: sometime also found with the name “ELM327 mini”, it’s a crappy clone of the former adapter. From what it can be read from &lt;a href=&quot;https://en.wikipedia.org/wiki/ELM327#Pirate_clones&quot;&gt;wikipedia&lt;/a&gt;, first version of ELM327 does not come with copy protections and this made very simple for hackers to dump the firmware and re-use it on other hardware. It can be difficult to distinguish a original ELM327 from a ELM327 clone, here are some advice:
+  &lt;li&gt;&lt;strong&gt;Original EML327&lt;/strong&gt;: this is the version made by &lt;a href=&quot;https://www.elmelectronics.com/&quot;&gt;ELM Electronic&lt;/a&gt;, which is an overall nice IC and a very simple way to interact with the OBD-II port.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Crappy Chinese ELM327 clone&lt;/strong&gt;: sometimes also found with the name “ELM327 mini”, it’s a crappy clone of the former adapter. From what it can be read from &lt;a href=&quot;https://en.wikipedia.org/wiki/ELM327#Pirate_clones&quot;&gt;wikipedia&lt;/a&gt;, the first version of ELM327 does not come with copy protections and this made very simple for hackers to dump the firmware and re-use it on other hardware. It can be difficult to distinguish an original ELM327 from an ELM327 clone, here are some advice:
     &lt;ul&gt;
       &lt;li&gt;&lt;strong&gt;If you’re going to buy one of them&lt;/strong&gt;: as a rule of thumb, if it cost less than 10-15 bucks or it is called “ELM327 mini” don’t waste your money. Consider that, at the time of writing, the ELM327 price at retail is 21$ on the manufacturer website. Always read reviews of the product you’re going to buy or ask directly to the seller.&lt;/li&gt;
-      &lt;li&gt;&lt;strong&gt;If you already own one of them in a WiFi/Bluetooth variant&lt;/strong&gt;: try using this &lt;a href=&quot;https://play.google.com/store/apps/details?id=com.applagapp.elm327identifier&amp;amp;hl=it&quot;&gt;app&lt;/a&gt; to see which capabilities the adapter has and don’t be fooled by the firmware version: it’s easy to find crappy chinese stuff that claim to be “v2.3” but in fact they fail to provide all the capabilities required even by v1.0.&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;If you already own one of them in a WiFi/Bluetooth variant&lt;/strong&gt;: try using this &lt;a href=&quot;https://play.google.com/store/apps/details?id=com.applagapp.elm327identifier&amp;amp;hl=it&quot;&gt;app&lt;/a&gt; to see which capabilities the adapter has and don’t be fooled by the firmware version: it’s easy to find crappy Chinese stuff that claims to be “v2.3” but in fact they fail to provide all the capabilities required even by v1.0.&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h2 id=&quot;can-to-something-adapters&quot;&gt;CAN to something adapters&lt;/h2&gt;
-&lt;p&gt;ELM327 proved to be a very simple and cheap way to interact with an ECU. Unfortunately ELM327 is meant to provide an access to the diagnostics of the car, not to be an hacker-friendly device and it will mask most of the things that are happening on the lowest levels.&lt;/p&gt;
+&lt;p&gt;ELM327 proved to be a very simple and cheap way to interact with an ECU. Unfortunately, ELM327 is meant to provide access to the diagnostics of the car, not to be a hacker-friendly device and it will mask most of the things that are happening on the lowest levels.&lt;/p&gt;
 
-&lt;p&gt;A better choice could be to use a CAN-to-* adapter, as it provide a raw and unfiltered access to the bus.&lt;/p&gt;
+&lt;p&gt;A better choice could be to use a CAN-to-* adapter, as it provides raw and unfiltered access to the bus.&lt;/p&gt;
 
-&lt;p&gt;For my experiments I used an MCP2515 CAN to SPI adapter connected to a Raspberry.&lt;/p&gt;
+&lt;p&gt;For my experiments, I used an MCP2515 CAN to SPI adapter connected to a Raspberry.&lt;/p&gt;
 
 &lt;h2 id=&quot;rs485-adapters&quot;&gt;RS485 adapters&lt;/h2&gt;
-&lt;p&gt;While it is theoretically possible to use a RS485-to-something adapter, I don’t have any experience on this.&lt;/p&gt;
+&lt;p&gt;While it is theoretically possible to use an RS485-to-something adapter, I don’t have any experience on this.&lt;/p&gt;
 
-&lt;p&gt;I can only guess that it should be way more difficult to make things works with said adapter, as a CAN-aware adapter is normally made by a transceiver and a controller. With a RS485 adapter you get the transceiver (that handle most of the layer 1), but you don’t get the controller (that handle the layer 2 and part of the 1). Because of this, you’ll need extra software to manage things like bit-stuffing and dominant/recessive logic.&lt;/p&gt;
+&lt;p&gt;I can only guess that it should be way more difficult to make things work with said adapter, as a CAN-aware adapter is normally made by a transceiver and a controller. With an RS485 adapter, you get the transceiver (that handle most of the layer 1), but you don’t get the controller (that handle the layer 2 and part of the 1). Because of this, you’ll need extra software to manage things like bit-stuffing and dominant/recessive logic.&lt;/p&gt;
 </description>
         <pubDate>Thu, 30 May 2019 00:00:00 +0200</pubDate>
         <link>https://www.chaplinspace.com/2019/Car-hacking-for-dummies-from-zero-to-pwn/</link>
@@ -286,13 +285,13 @@ This can be useful both for collision detection and for managing priorities.&lt;
 &lt;p&gt;The ESET CrackMe Challenge 2015 is divided into 2 parts:&lt;/p&gt;
 
 &lt;ol&gt;
-  &lt;li&gt;This is the one you download from the ESET website. You are asked to reverse an UPX packed executable and find one password (&lt;strong&gt;Drevokokur&lt;/strong&gt;). Then the application decrypts a message with this password that basically asks you to decrypt in the same way some unreferenced data inside the exe. This unreferenced data, once decrypted, gives you a link to download the 2nd part, which is the subject of this document. I won’t discuss the first part any further.&lt;/li&gt;
+  &lt;li&gt;This is the one you download from the ESET website. You are asked to reverse a UPX packed executable and find one password (&lt;strong&gt;Drevokokur&lt;/strong&gt;). Then the application decrypts a message with this password that basically asks you to decrypt in the same way some unreferenced data inside the exe. This unreferenced data, once decrypted, gives you a link to download the 2nd part, which is the subject of this document. I won’t discuss the first part any further.&lt;/li&gt;
   &lt;li&gt;The second part is made of an EXE and a DLL. The files to analyze are two: &lt;strong&gt;EsetCrackme2015.exe&lt;/strong&gt; and &lt;strong&gt;EsetCrackme2015.dll&lt;/strong&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;
 
-&lt;p&gt;The aim of this challenge is to find 3 passwords. The application uses various obfuscation techniques and I have set my goal to get things done with the minimum effort. Given the huge amount of obfuscation/hiding techniques used in this challenge, this paper is only meant as a guide to retrieve the three passwords. I won’t describe a lot of things in detail, if you want to deepen some topics you can check the repo linked at the beginning of the post.&lt;/p&gt;
+&lt;p&gt;The aim of this challenge is to find 3 passwords. The application uses various obfuscation techniques and I have set my goal to get things done with the minimum effort. Given the huge amount of obfuscation/hiding techniques used in this challenge, this paper is only meant as a guide to retrieve the three passwords. I won’t describe a lot of things in detail if you want to deepen some topics you can check the repo linked at the beginning of the post.&lt;/p&gt;
 
 &lt;p&gt;Its structure is as follows:&lt;/p&gt;
 
@@ -306,7 +305,7 @@ This can be useful both for collision detection and for managing priorities.&lt;
   &lt;tbody&gt;
     &lt;tr&gt;
       &lt;td&gt;Analysis&lt;/td&gt;
-      &lt;td&gt;Is divided in subfolders. Every subfolder’s name is the ID of a resource (see below) Subfolders contains file related to my analysis, IDA DBs, tools I wrote and, eventually,  the resource itself decrypted (if the original is encrypted).&lt;/td&gt;
+      &lt;td&gt;Is divided into subfolders. Every subfolder’s name is the ID of a resource (see below) Subfolders contains file related to my analysis, IDA DBs, tools I wrote and, eventually,  the resource itself decrypted (if the original is encrypted).&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td&gt;Resources&lt;/td&gt;
@@ -363,7 +362,7 @@ Note: the file is small and a large portion of it is made of digital signature (
 &lt;h2 id=&quot;rationale-1&quot;&gt;Rationale&lt;/h2&gt;
 &lt;p&gt;The application decrypts resource with ID &lt;code class=&quot;highlighter-rouge&quot;&gt;0x0101&lt;/code&gt; using the key “&lt;strong&gt;Irren%20ist%20menschlich&lt;/strong&gt;” (resource ID &lt;code class=&quot;highlighter-rouge&quot;&gt;0x0003&lt;/code&gt;), then enters in a loop.&lt;/p&gt;
 
-&lt;p&gt;In this loop it repeatedly calls the decrypted resource until its result is not zero. At that time it waits for some events to occur (see below), then it starts from the begin.&lt;/p&gt;
+&lt;p&gt;In this loop, it repeatedly calls the decrypted resource until its result is not zero. At that time it waits for some events to occur (see below), then it starts from the begin.&lt;/p&gt;
 
 &lt;p&gt;The application also starts a thread that makes it communicate with every entity that makes a request through the PIPE &lt;code class=&quot;highlighter-rouge&quot;&gt;\\.\pipe\EsetCrackmePipe&lt;/code&gt; (&lt;code class=&quot;highlighter-rouge&quot;&gt;ID 0x0002&lt;/code&gt;) with a simple protocol:&lt;/p&gt;
 
@@ -371,32 +370,32 @@ Note: the file is small and a large portion of it is made of digital signature (
   &lt;li&gt;Request
     &lt;ol&gt;
       &lt;li&gt;1 byte: Type of request&lt;/li&gt;
-      &lt;li&gt;2 byte: ID&lt;/li&gt;
+      &lt;li&gt;2 bytes: ID&lt;/li&gt;
     &lt;/ol&gt;
   &lt;/li&gt;
   &lt;li&gt;Response
     &lt;ol&gt;
       &lt;li&gt;1 byte: Type of request&lt;/li&gt;
-      &lt;li&gt;2 byte: ID&lt;/li&gt;
-      &lt;li&gt;4 byte: size (if request is of type 1)&lt;/li&gt;
-      &lt;li&gt;N byte: data (if request is of type 1)
+      &lt;li&gt;2 bytes: ID&lt;/li&gt;
+      &lt;li&gt;4 bytes: size (if the request is of type 1)&lt;/li&gt;
+      &lt;li&gt;N byte: data (if the request is of type 1)
 Type 1 is used to retrieve resources, type 2 is used to signal events.&lt;/li&gt;
     &lt;/ol&gt;
   &lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;h1 id=&quot;first-password&quot;&gt;First password&lt;/h1&gt;
-&lt;p&gt;In the decrypted routine that is called by the application a lot of things can happen.&lt;/p&gt;
+&lt;p&gt;In the decrypted routine that is called by the application, a lot of things can happen.&lt;/p&gt;
 
-&lt;p&gt;First time the resources with ID &lt;code class=&quot;highlighter-rouge&quot;&gt;0x0102&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;0x0103&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;0x0104&lt;/code&gt; are loaded:&lt;/p&gt;
+&lt;p&gt;The first time the resources with ID &lt;code class=&quot;highlighter-rouge&quot;&gt;0x0102&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;0x0103&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;0x0104&lt;/code&gt; are loaded:&lt;/p&gt;
 &lt;ol&gt;
   &lt;li&gt;The first is a (simple) virtual machine.&lt;/li&gt;
   &lt;li&gt;The second is the bytecode of a program that uses &lt;a href=&quot;https://www.trustwave.com/Resources/SpiderLabs-Blog/Analyzing-Malware-Hollow-Processes/&quot;&gt;process hollowing&lt;/a&gt; to inject the resource &lt;code class=&quot;highlighter-rouge&quot;&gt;0x0151&lt;/code&gt; in Svchost.exe.&lt;/li&gt;
-  &lt;li&gt;The third is the bytecode of program that can take the resource data, a path in input, and dump the resource in the path.
-I leave out the analysis of the VM for the moment because it is not important for the first password. All we need to know for now is that this program inject something in svchost.exe&lt;/li&gt;
+  &lt;li&gt;The third is the bytecode of a program that can take the resource data, a path in input, and dump the resource in the path.
+I leave out the analysis of the VM for the moment because it is not important for the first password. All we need to know for now is that this program injects something in svchost.exe&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;p&gt;This can be easily seen by the context, because if you break at &lt;code class=&quot;highlighter-rouge&quot;&gt;0x00060AEC&lt;/code&gt; (the VM main loop) you’ll see that at some time the process svchost.exe is created suspended, so it’s easy to guess what’s going on. Also, if you look for the processs linked with the GUI that stands out when you open EsetCrackme2015.exe, you’ll see that is svchost.exe and not EsetCrackme2015.exe&lt;/p&gt;
+&lt;p&gt;This can be easily seen by the context because if you break at &lt;code class=&quot;highlighter-rouge&quot;&gt;0x00060AEC&lt;/code&gt; (the VM main loop) you’ll see that at some time the process svchost.exe is created suspended, so it’s easy to guess what’s going on. Also, if you look for the processes linked with the GUI that stands out when you open EsetCrackme2015.exe, you’ll see that is svchost.exe and not EsetCrackme2015.exe&lt;/p&gt;
 
 &lt;p&gt;We can see what is injected by dumping the resource on disk after decryption (&lt;a href=&quot;https://github.com/chaplin89/challenges/tree/master/ESET-2015/Resources/0x0151_Injected/Injected.exe&quot;&gt;Resources/0x0151_Injected/Injected.exe&lt;/a&gt;). It doesn’t use any debugging protection, so you can simply attach your debugger to the right instance of svchost.exe and dump process data.&lt;/p&gt;
 
@@ -404,7 +403,7 @@ I leave out the analysis of the VM for the moment because it is not important fo
 
 &lt;p&gt;&lt;img src=&quot;/assets/images/Crackme.png&quot; alt=&quot;Eset Crackme&quot; class=&quot;center-image&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;On the button click events, it computes a hash on the inserted password and then compares them against a pre-loaded hash. These hashes are loaded from the main application through the PIPE, then decrypted (ID &lt;code class=&quot;highlighter-rouge&quot;&gt;0xBB01&lt;/code&gt;). Algorithm which is used to compute hash is SHA-1, so I consider this a dead end.&lt;/p&gt;
+&lt;p&gt;On the button click events, it computes a hash on the inserted password and then compares them against a pre-loaded hash. These hashes are loaded from the main application through the PIPE, then decrypted (ID &lt;code class=&quot;highlighter-rouge&quot;&gt;0xBB01&lt;/code&gt;). The algorithm which is used to compute hash is SHA-1, so I consider this a dead end.&lt;/p&gt;
 
 &lt;p&gt;The application also starts a thread, that replaces the &lt;code class=&quot;highlighter-rouge&quot;&gt;DlgProc&lt;/code&gt; at runtime via &lt;a href=&quot;https://msdn.microsoft.com/en-us/library/windows/desktop/ms633591%28v=vs.85%29.aspx&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;SetWindowLong&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
 
@@ -421,13 +420,13 @@ I leave out the analysis of the VM for the moment because it is not important fo
 
 &lt;p&gt;This resource is a zip folder that contains a Win32 legacy driver that you have to install.&lt;/p&gt;
 
-&lt;p&gt;This driver is a ramdisk, its architecture is more or less the same that you’ll find as example in Microsoft website (see: &lt;a href=&quot;https://github.com/chaplin89/challenges/tree/master/ESET-2015/Analysis/0x0152_Drv.zip/RAMDISK&quot;&gt;Analysis/0x0152_Drv.zip/RAMDISK&lt;/a&gt;). You can read that code to understand the main functionality of this driver.&lt;/p&gt;
+&lt;p&gt;This driver is a ramdisk, its architecture is more or less the same that you’ll find an example in Microsoft website (see: &lt;a href=&quot;https://github.com/chaplin89/challenges/tree/master/ESET-2015/Analysis/0x0152_Drv.zip/RAMDISK&quot;&gt;Analysis/0x0152_Drv.zip/RAMDISK&lt;/a&gt;). You can read that code to understand the main functionality of this driver.&lt;/p&gt;
 
 &lt;p&gt;There are, of course, some important differences that I’ll explain.&lt;/p&gt;
 
 &lt;p&gt;The routine that changes most is the &lt;code class=&quot;highlighter-rouge&quot;&gt;DispatchReadWrite&lt;/code&gt;: basically, the principle is that you write something in the ramdisk then when you read it the driver decrypt what you wrote on the fly. One of the differences between this driver and the MS example is that this driver does not create any symbolic link, so every read/write is done by creating a handle to the device name that is &lt;code class=&quot;highlighter-rouge&quot;&gt;\\?\GLOBALROOT\Device\45736574\&lt;/code&gt;.&lt;/p&gt;
 
-&lt;p&gt;The driver in the “&lt;code class=&quot;highlighter-rouge&quot;&gt;add&lt;/code&gt;” routine, starts a bunch of threads that use the PIPE to communicate with the application. The application gives the driver the string “&lt;strong&gt;ESETConst&lt;/strong&gt;” (&lt;code class=&quot;highlighter-rouge&quot;&gt;ID 0xAA02&lt;/code&gt;) that is used as the name of a registry key and a program for the virtual machine that lies inside the driver (&lt;code class=&quot;highlighter-rouge&quot;&gt;ID 0xAA06&lt;/code&gt;).&lt;/p&gt;
+&lt;p&gt;The driver in the “&lt;code class=&quot;highlighter-rouge&quot;&gt;add&lt;/code&gt;” routine starts a bunch of threads that use the PIPE to communicate with the application. The application gives the driver the string “&lt;strong&gt;ESETConst&lt;/strong&gt;” (&lt;code class=&quot;highlighter-rouge&quot;&gt;ID 0xAA02&lt;/code&gt;) that is used as the name of a registry key and a program for the virtual machine that lies inside the driver (&lt;code class=&quot;highlighter-rouge&quot;&gt;ID 0xAA06&lt;/code&gt;).&lt;/p&gt;
 
 &lt;p&gt;This program is the one who decrypts what you write inside the ramdisk.&lt;/p&gt;
 
@@ -435,9 +434,9 @@ I leave out the analysis of the VM for the moment because it is not important fo
 
 &lt;p&gt;&lt;img src=&quot;/assets/images/vm_decompiler.png&quot; alt=&quot;Decompiler&quot; class=&quot;center-image&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;The VM that runs inside the driver is slightly different from the one that runs inside the application. In particular, the offset of the header fields are different.&lt;/p&gt;
+&lt;p&gt;The VM that runs inside the driver is slightly different from the one that runs inside the application. In particular, the offset of the header fields is different.&lt;/p&gt;
 
-&lt;p&gt;Header contains the following fields:&lt;/p&gt;
+&lt;p&gt;The header contains the following fields:&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;2 Byte: Signature&lt;/li&gt;
@@ -447,14 +446,14 @@ I leave out the analysis of the VM for the moment because it is not important fo
 The signature is compared against a constant (“1337” for app VM, “3713” for driver VM). If the signature does not match, the execution begins from the 1st byte following the header (decryption stub), if it matches, the execution begins from the MainOffset byte following the header.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;VM is quite simple. It can support 255 opcodes but only 15 of them are implemented. If the program contains not supported opcocodes, the program terminates.&lt;/p&gt;
+&lt;p&gt;VM is quite simple. It can support 255 opcodes but only 15 of them are implemented. If the program contains not supported opcodes, the program terminates.&lt;/p&gt;
 
 &lt;p&gt;The VM virtualize a stack, 4MB, and a CPU with 16 registers:&lt;/p&gt;
 
 &lt;ol&gt;
   &lt;li&gt;Register from 0 to 5 are GP&lt;/li&gt;
   &lt;li&gt;6 is SP&lt;/li&gt;
-  &lt;li&gt;7 is begin of loaded program&lt;/li&gt;
+  &lt;li&gt;7 is the begin of the loaded program&lt;/li&gt;
   &lt;li&gt;8 is loaded program size&lt;/li&gt;
   &lt;li&gt;9 is the library flag&lt;/li&gt;
   &lt;li&gt;
@@ -462,24 +461,24 @@ The signature is compared against a constant (“1337” for app VM, “3713” 
 Here is a brief description of opcodes, for further reference see the file &lt;a href=&quot;https://github.com/chaplin89/challenges/tree/master/ESET-2015/Analysis/0x0102_VirtualMachine/VMOpcodes.xlsx&quot;&gt;Analysis/0x0102_VirtualMachine/VMOpcodes.xlsx&lt;/a&gt;:&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;Terminate the program.&lt;/li&gt;
-  &lt;li&gt;Move data. Destination is a register.&lt;/li&gt;
+  &lt;li&gt;Move data. The destination is a register.&lt;/li&gt;
   &lt;li&gt;(Native) Call. Make a call to the argument.&lt;/li&gt;
-  &lt;li&gt;Call library. Arguments are the hash of the name of a (loaded) library and the hash of the name of a function exported by the library.&lt;/li&gt;
+  &lt;li&gt;Call the library. Arguments are the hash of the name of a (loaded) library and the hash of the name of a function exported by the library.&lt;/li&gt;
   &lt;li&gt;Push argument in the stack (load argument in memory pointed by SP and then decrement SP).&lt;/li&gt;
-  &lt;li&gt;Pop dword from stack into a register (copy dword from memory pointed by SP into register then increment SP).&lt;/li&gt;
-  &lt;li&gt;Logical operation, first operand is a register. Operation could be: not equal, equal, minor. If the condition is met, a flag is set.&lt;/li&gt;
-  &lt;li&gt;Jump. This can be conditional, in that case the IP is updated only if the flag is set.
+  &lt;li&gt;Pop dword from the stack into a register (copy dword from memory pointed by SP into register then increment SP).&lt;/li&gt;
+  &lt;li&gt;Logical operations, the first operand is a register. The operation could be: not equal, equal, minor. If the condition is met, a flag is set.&lt;/li&gt;
+  &lt;li&gt;Jump. This can be conditional, in that case, the IP is updated only if the flag is set.
 (Virtual) Call. Push IP, then change it with argument.&lt;/li&gt;
-  &lt;li&gt;Pop dword from stack into IP.&lt;/li&gt;
-  &lt;li&gt;Arithmetic operation, first operand is a register. Operation could be add, sub, left shit, right shift, ROR, ROL, module.&lt;/li&gt;
-  &lt;li&gt;Allocate memory. Operand is the size. Pointer to allocated memory is saved in Register 0.&lt;/li&gt;
-  &lt;li&gt;Deallocate memory. Operand is the pointer. The program pointed by the argument is loaded in memory takes the place of the loaded one.&lt;/li&gt;
-  &lt;li&gt;Terminate program. This is called when an invalid opcode is found.&lt;/li&gt;
+  &lt;li&gt;Pop dword from the stack into IP.&lt;/li&gt;
+  &lt;li&gt;Arithmetic operations, the first operand is a register. The operation could be: add, sub, left shit, right shift, ROR, ROL, module.&lt;/li&gt;
+  &lt;li&gt;Allocate memory. The operand is the size. The pointer to allocated memory is saved in Register 0.&lt;/li&gt;
+  &lt;li&gt;Deallocate memory. The operand is the pointer. The program pointed by the argument is loaded in memory takes the place of the loaded one.&lt;/li&gt;
+  &lt;li&gt;Terminate the program. This is called when an invalid opcode is found.&lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;p&gt;The VM iterates through every byte in the program and calls the appropriate handler until it finds an exit opcode or an invalid one. The handlers accept a structure (Context) in input that contains the status of the CPU.&lt;/p&gt;
 
-&lt;p&gt;The programs that runs inside the driver could be seen in &lt;a href=&quot;https://github.com/chaplin89/challenges/tree/master/ESET-2015/Analysis/0x0152_Drv.zip/VM Programs&quot;&gt;Analysis/0x0152_Drv.zip/VM Programs&lt;/a&gt;. The odd thing is that in this program the registry key (ESETConst) is checked against null but seeing the dispatch RW routine it is easy to spot that the VM can’t start if the Key is null.&lt;/p&gt;
+&lt;p&gt;The programs that run inside the driver could be seen in &lt;a href=&quot;https://github.com/chaplin89/challenges/tree/master/ESET-2015/Analysis/0x0152_Drv.zip/VM Programs&quot;&gt;Analysis/0x0152_Drv.zip/VM Programs&lt;/a&gt;. The odd thing is that in this program the registry key (ESETConst) is checked against null but seeing the dispatch RW routine it is easy to spot that the VM can’t start if the Key is null.&lt;/p&gt;
 
 &lt;p&gt;In fact, reversing the algorithm we find the 2nd password: &lt;strong&gt;Barbakan Krakowski&lt;/strong&gt; a building in Krakow:&lt;/p&gt;
 
@@ -504,13 +503,13 @@ Here is a brief description of opcodes, for further reference see the file &lt;a
 
 &lt;p&gt;Strings are not directly visible. They are merged together and constitute a blob of data. There are some stub methods, one for each string, that know how to extract strings from this blob of data.
 As various obfuscation schemas do, invalid C# names are used. In IL you can, for example, re-uses the same name for different types, because in IL you always have to fully-qualify everything you use, so there is no ambiguity.
-My first attempt to understand what the software does, was to write a plugin for de4dot. I wrote the skeleton of the obfuscator but then I realized that important functions are very little and it is not hard to understand what they do, so I’ve chosen a different approach:&lt;/p&gt;
+My first attempt to understand what the software does was to write a plugin for de4dot. I wrote the skeleton of the obfuscator but then I realized that important functions are very little and it is not hard to understand what they do, so I’ve chosen a different approach:&lt;/p&gt;
 
 &lt;p&gt;First of all a &lt;code class=&quot;highlighter-rouge&quot;&gt;“de4dot –un-name !.*”&lt;/code&gt; is by default.
 So I’ve used dotPeek to decompile the program and recreate the VS project.
 With very little changes (mainly moving variable declaration) and some textual parsing (see &lt;a href=&quot;https://github.com/chaplin89/challenges/tree/master/ESET-2015/Utility/PunchStringDeob&quot;&gt;Utility/PunchStringDeob&lt;/a&gt;) I was able to compile both projects.&lt;/p&gt;
 
-&lt;p&gt;In these application, resources loaded from the main app are decrypted with the AES algorithm in ECB mode (that I think could explain a lack of the entropy at the end of DLL). The key is an MD5 hash computed against the body of some methods that has a particular attribute and the attribute itself. Of course when I recreated the project in VS the MD5 hash has changed, so I wrote a program that emulate the hash computation using the original file as input, then I hardcoded the key in the recompiled programs to make things work (see &lt;a href=&quot;https://github.com/chaplin89/challenges/tree/master/ESET-2015/Utility/ExtractKey&quot;&gt;Utility/ExtractKey&lt;/a&gt;).&lt;/p&gt;
+&lt;p&gt;In these applications, resources loaded from the main app are decrypted with the AES algorithm in ECB mode (that I think could explain a lack of the entropy at the end of DLL). The key is an MD5 hash computed against the body of some methods that has a particular attribute and the attribute itself. Of course, when I recreated the project in VS the MD5 hash has changed, so I wrote a program that emulates the hash computation using the original file as input, then I hardcoded the key in the recompiled programs to make things work (see &lt;a href=&quot;https://github.com/chaplin89/challenges/tree/master/ESET-2015/Utility/ExtractKey&quot;&gt;Utility/ExtractKey&lt;/a&gt;).&lt;/p&gt;
 
 &lt;h1 id=&quot;meet-punchermachineexe&quot;&gt;Meet PuncherMachine.exe&lt;/h1&gt;
 &lt;p&gt;Once open, it shows this image:&lt;/p&gt;
@@ -519,15 +518,15 @@ With very little changes (mainly moving variable declaration) and some textual p
 
 &lt;p&gt;It uses PIPE to check if EsetCrackme2015.exe is open. If it isn’t, it won’t start.&lt;/p&gt;
 
-&lt;p&gt;Of course here I made an “ignorant” attempt to make the application load the file extracted from driver. Of course it didn’t work.&lt;/p&gt;
+&lt;p&gt;Of course, here I made an “ignorant” attempt to make the application load the file extracted from the driver. Of course, it didn’t work.&lt;/p&gt;
 
 &lt;p&gt;There are some odd things inside &lt;code class=&quot;highlighter-rouge&quot;&gt;PuncherMachine.exe&lt;/code&gt; that promptly stand out.&lt;/p&gt;
 
-&lt;p&gt;It tries to refer a resource named “&lt;code class=&quot;highlighter-rouge&quot;&gt;resource0&lt;/code&gt;” and there is no such resource in the assembly.
+&lt;p&gt;It tries to refer to a resource named “&lt;code class=&quot;highlighter-rouge&quot;&gt;resource0&lt;/code&gt;” and there is no such resource in the assembly.
 It tries to retrieve a resource from the main application with ID &lt;code class=&quot;highlighter-rouge&quot;&gt;0xFF03&lt;/code&gt; and there is no such resource in the DLL.
-You can make the application find &lt;code class=&quot;highlighter-rouge&quot;&gt;resource0&lt;/code&gt; into the assembly or you can perform a “man in the middle” attack through the PIPE to inject the resource, the result is pretty much the same: a hash is computed on this resource and is checked against the hash of the file that you choose from the file dialog. If it matches, the software lead you to the 2nd stage, if it doesn’t match an “&lt;code class=&quot;highlighter-rouge&quot;&gt;Invalid punchcard!&lt;/code&gt;” message is shown.&lt;/p&gt;
+You can make the application find &lt;code class=&quot;highlighter-rouge&quot;&gt;resource0&lt;/code&gt; into the assembly or you can perform a “man in the middle” attack through the PIPE to inject the resource, the result is pretty much the same: a hash is computed on this resource and is checked against the hash of the file that you choose from the file dialog. If it matches, the software leads you to the 2nd stage, if it doesn’t match an “&lt;code class=&quot;highlighter-rouge&quot;&gt;Invalid punchcard!&lt;/code&gt;” message is shown.&lt;/p&gt;
 
-&lt;p&gt;If the application doesn’t find one or the other, it checks the hash of the input file against an unknown hash (resource ID &lt;code class=&quot;highlighter-rouge&quot;&gt;0xFF02&lt;/code&gt;): &lt;code class=&quot;highlighter-rouge&quot;&gt;95eceaa118dd081119e26be1c44da2cb&lt;/code&gt;. Then the check fails because I don’t have the file that has that MD5 hash, but maybe I’m missing something here. In fact I’m quite sure that there is far more than it seems in the bitmap. Of course a bitmap full of noise seems very strange in a challenge that is stuffed with mysteries. My guess is that there is another bitmap that can be decoded starting from the first, and that bitmap has the required hash. By the way I haven’t spent time on this because the bitmap plays a minor role in this process and it is not functional to retrieve the 3rd password. Also, as I’ll explain later, this bitmap although I think is decoded well, does not allow to complete the challenge.&lt;/p&gt;
+&lt;p&gt;If the application doesn’t find one or the other, it checks the hash of the input file against an unknown hash (resource ID &lt;code class=&quot;highlighter-rouge&quot;&gt;0xFF02&lt;/code&gt;): &lt;code class=&quot;highlighter-rouge&quot;&gt;95eceaa118dd081119e26be1c44da2cb&lt;/code&gt;. Then the check fails because I don’t have the file that has that MD5 hash, but maybe I’m missing something here. In fact, I’m quite sure that there is far more than it seems in the bitmap. Of course, a bitmap full of noise seems very strange in a challenge that is stuffed with mysteries. My guess is that there is another bitmap that can be decoded starting from the first, and that bitmap has the required hash. By the way, I haven’t spent time on this because the bitmap plays a minor role in this process and it is not functional to retrieve the 3rd password. Also, as I’ll explain later, this bitmap although I think is decoded well, does not allow me to complete the challenge.&lt;/p&gt;
 
 &lt;p&gt;At this point I made the recompiled software load “&lt;code class=&quot;highlighter-rouge&quot;&gt;resource0”&lt;/code&gt;, that is my bitmap.&lt;/p&gt;
 
@@ -541,34 +540,34 @@ You can make the application find &lt;code class=&quot;highlighter-rouge&quot;&g
 
 &lt;p&gt;The assembly is obtained through PIPE (resource ID &lt;code class=&quot;highlighter-rouge&quot;&gt;0xFF04&lt;/code&gt;) and the method is called “&lt;code class=&quot;highlighter-rouge&quot;&gt;createMethod&lt;/code&gt;”.&lt;/p&gt;
 
-&lt;p&gt;After dumping the assembly on disk I could analyze it (see &lt;a href=&quot;https://github.com/chaplin89/challenges/tree/master/ESET-2015/Analysis/0xFF04_CalibrationDynMethod.dll/CalibrationDynMethod&quot;&gt;Analysis/0xFF04_CalibrationDynMethod.dll/CalibrationDynMethod&lt;/a&gt; for full code). The assembly is very simple and luckily is not obfuscated. It can create the skeleton of a method with Reflection.Emit classes. In this skeleton some instructions are missing. The method uses the input constants as hashes to decide which opcode to emit so understanding what the generated function should do is the first step to decide which opcode should be there. It is not that hard because it contains some hardcoded constants and searching these constants on Google it comes out that this is the “Knuth Hash” algorithm and the missing instructions are then: ldarg.0 and mul.&lt;/p&gt;
+&lt;p&gt;After dumping the assembly on disk I could analyze it (see &lt;a href=&quot;https://github.com/chaplin89/challenges/tree/master/ESET-2015/Analysis/0xFF04_CalibrationDynMethod.dll/CalibrationDynMethod&quot;&gt;Analysis/0xFF04_CalibrationDynMethod.dll/CalibrationDynMethod&lt;/a&gt; for full code). The assembly is very simple and luckily is not obfuscated. It can create the skeleton of a method with Reflection.Emit classes. In this skeleton, some instructions are missing. The method uses the input constants as hashes to decide which opcode to emit so understanding what the generated function should do is the first step to decide which opcode should be there. It is not that hard because it contains some hardcoded constants and searching these constants on Google it comes out that this is the “Knuth Hash” algorithm and the missing instructions are then: ldarg.0 and mul.&lt;/p&gt;
 
 &lt;p&gt;Basing on this, the Calibration code 1 should be &lt;code class=&quot;highlighter-rouge&quot;&gt;0364ABE72D29C96C&lt;/code&gt; (see &lt;a href=&quot;https://github.com/chaplin89/challenges/tree/master/ESET-2015/Analysis/0xFF04_CalibrationDynMethod.dll/CalibrationDynMethod_HashTable.txt&quot;&gt;Analysis/0xFF04_CalibrationDynMethod.dll/CalibrationDynMethod_HashTable.txt&lt;/a&gt;).&lt;/p&gt;
 
-&lt;p&gt;The created method is then called in a loop. Every char of the calibration code 2 is added to a char in a list, then the Knuth Hash is computed basing on this input. Every hash in output, then, should be the key of an hashtable for the “calibration process” to be successful. This hashtable is the resource &lt;code class=&quot;highlighter-rouge&quot;&gt;0xFF00&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;The created method is then called in a loop. Every char of the calibration code 2 is added to a char in a list, then the Knuth Hash is computed based on this input. Every hash in output, then, should be the key of a hashtable for the “calibration process” to be successful. This hashtable is the resource &lt;code class=&quot;highlighter-rouge&quot;&gt;0xFF00&lt;/code&gt;.&lt;/p&gt;
 
 &lt;p&gt;It comes out that the only string that met this condition is “&lt;strong&gt;Infant Jesus of Prague&lt;/strong&gt;” (that it is also the third password), a statue in Prague:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/images/InfantJesus.jpg&quot; alt=&quot;Infant jesus of prague&quot; class=&quot;center-image&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/InfantJesus.jpg&quot; alt=&quot;Infant Jesus of prague&quot; class=&quot;center-image&quot; /&gt;&lt;/p&gt;
 
 &lt;h1 id=&quot;4th-condition&quot;&gt;4th Condition&lt;/h1&gt;
-&lt;p&gt;Honestly, at this point my interest in the Eset CrackMe Challenge 2015 really dropped down. I found the 2nd password interesting to find (with my actual skills) and I was expecting some kind of escalation, but the third one is actually way too boring and way too easy compared to the 2nd, also bearing in mind that I’m a complete newbie with the .net stuff (the VM decompiler is actually my hello-world in C#) and so my expectations were greatly disillusioned.&lt;/p&gt;
+&lt;p&gt;Honestly, at this point, my interest in the Eset CrackMe Challenge 2015 really dropped down. I found the 2nd password interesting to find (with my actual skills) and I was expecting some kind of escalation, but the third one is actually way too boring and way too easy compared to the 2nd, also bearing in mind that I’m a complete newbie with the .net stuff (the VM decompiler is actually my hello-world in C#) and so my expectations were greatly disillusioned.&lt;/p&gt;
 
-&lt;p&gt;The truth is that it was hard to stay in the right mood in order to continue the challenge and I continued until I could do things that required limited effort, but I gave up at the really end because I thought it wasn’t fun anymore.&lt;/p&gt;
+&lt;p&gt;The truth is that it was hard to stay in the right mood in order to continue the challenge and I continued until I could do things that required limited effort, but I gave up at the real end because I thought it wasn’t fun anymore.&lt;/p&gt;
 
 &lt;p&gt;By the way, if you want I have paved the way and you have all you need in order to finish the challenge, maybe you can prove I was wrong.&lt;/p&gt;
 
-&lt;p&gt;Ok, enough bla-bla, back to the challenge.&lt;/p&gt;
+&lt;p&gt;Ok, enough blah-blah, back to the challenge.&lt;/p&gt;
 
-&lt;p&gt;If you look inside &lt;code class=&quot;highlighter-rouge&quot;&gt;0x10000CDD&lt;/code&gt; you’ll see that there are 4 conditions to meet in order to make the application show you a greeting message. 3 of them are events fired when you enter the right passwords. The 4th condition is an event fired by PunchCardReader.exe, we’ll get there.&lt;/p&gt;
+&lt;p&gt;If you look inside &lt;code class=&quot;highlighter-rouge&quot;&gt;0x10000CDD&lt;/code&gt; you’ll see that there are 4 conditions to meet in order to make the application show you a greeting message. 3 of them are events fired when you enter the right passwords. A 4th condition is an event fired by PunchCardReader.exe, we’ll get there.&lt;/p&gt;
 
 &lt;p&gt;What matter for the moment is that when you enter the valid calibration codes, the GUI changes:&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/images/4thCondition.png&quot; alt=&quot;Calibrated&quot; class=&quot;center-image&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;As you can see on the “PunchIt!” button handler, it can encode the string that you insert in the bitmap that then are written on disk with name punch_card_XXX.bmp (where XXX is in range 000-999) with a fancy animation and a very relaxing background noise.&lt;/p&gt;
+&lt;p&gt;As you can see on the “PunchIt!” button handler, it can encode the string that you insert in the bitmap that then is written on disk with name punch_card_XXX.bmp (where XXX is in range 000-999) with a fancy animation and a very relaxing background noise.&lt;/p&gt;
 
-&lt;p&gt;Next step is to figure out what should be encoded in bitmaps.&lt;/p&gt;
+&lt;p&gt;The next step is to figure out what should be encoded in bitmaps.&lt;/p&gt;
 
 &lt;h1 id=&quot;meet-punchcardreaderexe&quot;&gt;Meet PunchCardReader.exe&lt;/h1&gt;
 &lt;p&gt;Once opened, it shows this dialog:&lt;/p&gt;
@@ -579,9 +578,9 @@ You can make the application find &lt;code class=&quot;highlighter-rouge&quot;&g
 
 &lt;p&gt;The principle, of course, is to produce some “punch cards” from PuncherMachine.exe then read these “punch cards” from PunchCardReader.exe&lt;/p&gt;
 
-&lt;p&gt;Seeing the disassembled program, it could be easily seen that punch cards are decoded into string. These strings are passed to the method of an assembly.&lt;/p&gt;
+&lt;p&gt;Seeing the disassembled program, it could be easily seen that punch cards are decoded into a string. These strings are passed to the method of an assembly.&lt;/p&gt;
 
-&lt;p&gt;The assembly is the resource &lt;code class=&quot;highlighter-rouge&quot;&gt;0xFF05&lt;/code&gt; and it is very similar to the former. It now accepts a string array that is used as IL instructions inside the skeleton of method. So inside these bitmap, created by PuncherMachine.exe there should be encoded a list of IL instruction.&lt;/p&gt;
+&lt;p&gt;The assembly is the resource &lt;code class=&quot;highlighter-rouge&quot;&gt;0xFF05&lt;/code&gt; and it is very similar to the former. It now accepts a string array that is used as IL instructions inside the skeleton of the method. So inside these bitmaps, created by PuncherMachine.exe, there should be encoded a list of IL instructions.&lt;/p&gt;
 
 &lt;p&gt;Seeing the assembly, it could easily be spotted what these instructions should be. The code does pretty much this:&lt;/p&gt;
 
@@ -599,18 +598,18 @@ You can make the application find &lt;code class=&quot;highlighter-rouge&quot;&g
 
 &lt;p&gt;Punching the bitmap with mul, add and ret does not let PunchCardReader.exe validate the bitmaps although these seem to be the right strings. I spent very little time on this but I think that it is due to the fact that the original bitmap is wrong, and this does not let the decoding process to work well.&lt;/p&gt;
 
-&lt;p&gt;If this assumption is correct, I think that 2 hypotesis are the most plausible:&lt;/p&gt;
+&lt;p&gt;If this assumption is correct, I think that 2 hypotheses are the most plausible:&lt;/p&gt;
 
 &lt;ol&gt;
-  &lt;li&gt;The re-implementation in C# of the VM program that run inside the driver is bugged. At first glance this seems unlikely to me because it produces an overall valid bitmap, but who knows.&lt;/li&gt;
-  &lt;li&gt;There is another bitmap that can be extracted from the 1st in some way (like trying to decrypt the content of the bitmap, XOR it or whatever). That bitmap is the one that has the unknown hash and will allow the decode process to work well.
+  &lt;li&gt;The re-implementation in C# of the VM program that runs inside the driver is bugged. At first glance this seems unlikely to me because it produces an overall valid bitmap, but who knows.&lt;/li&gt;
+  &lt;li&gt;There is another bitmap that can be extracted from the 1st in some way (like trying to decrypt the content of the bitmap, XOR it or whatever). That bitmap is the one that has the unknown hash and will allow the decoding process to work well.
     &lt;h1 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h1&gt;
     &lt;p&gt;That’s all!
-After all it is a nice crackme. I think the VM part is the best because it is very well written and stable. Kudos to the authors.&lt;/p&gt;
+After all, it is a nice crackme. I think the VM part is the best because it is very well written and stable. Kudos to the authors.&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;p&gt;Looking forward for the 2016 challenge, bye.&lt;/p&gt;
+&lt;p&gt;Looking forward to the 2016 challenge, bye.&lt;/p&gt;
 
 </description>
         <pubDate>Fri, 08 Jan 2016 00:00:00 +0100</pubDate>
