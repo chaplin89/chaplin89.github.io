@@ -4,17 +4,17 @@ published: true
 ---
 <!DOCTYPE html>
 <html>
-  {% include head.html %}
-  <body>
-    <div class="wrapper">
-    <aside class="navigation">
-      {% include header.html %}
-    </aside >
-    <main class="main">
+{% include head.html %}
+
+<body>
+  <div class="wrapper">
+    {% include header.html %}
+    {% include left-panel.html %}
+    <div class="main">
       {{ content }}
-      {% include footer.html %}
-    </main>
+    </div>
   </div>
-    {% include foot.html %}
-  </body>
+  {% include foot.html %}
+</body>
+
 </html>
