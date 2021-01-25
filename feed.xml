@@ -5,8 +5,8 @@
     <description>Blog about hacking and other nasty things.</description>
     <link>https://www.chaplinspace.com/</link>
     <atom:link href="https://www.chaplinspace.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 25 Jan 2021 22:17:01 +0100</pubDate>
-    <lastBuildDate>Mon, 25 Jan 2021 22:17:01 +0100</lastBuildDate>
+    <pubDate>Mon, 25 Jan 2021 22:34:57 +0100</pubDate>
+    <lastBuildDate>Mon, 25 Jan 2021 22:34:57 +0100</lastBuildDate>
     <generator>Jekyll v3.9.0</generator>
     
       <item>
@@ -18,8 +18,8 @@ Pay attention to select “Separate /home /var and /tmp on partitions”, as sho
 
 </description>
         <pubDate>Mon, 20 Jan 2020 00:00:00 +0100</pubDate>
-        <link>https://www.chaplinspace.com/2020/How-to-Setup-dm-verity-on-a-minimal-debian-installation/</link>
-        <guid isPermaLink="true">https://www.chaplinspace.com/2020/How-to-Setup-dm-verity-on-a-minimal-debian-installation/</guid>
+        <link>https://www.chaplinspace.com/2020/Setup-dm-verity-on-a-minimal-debian-installation/</link>
+        <guid isPermaLink="true">https://www.chaplinspace.com/2020/Setup-dm-verity-on-a-minimal-debian-installation/</guid>
         
         
       </item>
@@ -30,8 +30,8 @@ Pay attention to select “Separate /home /var and /tmp on partitions”, as sho
 
 </description>
         <pubDate>Thu, 30 May 2019 00:00:00 +0200</pubDate>
-        <link>https://www.chaplinspace.com/2019/Car-hacking-for-dummies-from-zero-to-pwn/</link>
-        <guid isPermaLink="true">https://www.chaplinspace.com/2019/Car-hacking-for-dummies-from-zero-to-pwn/</guid>
+        <link>https://www.chaplinspace.com/2019/Car-hacking-101/</link>
+        <guid isPermaLink="true">https://www.chaplinspace.com/2019/Car-hacking-101/</guid>
         
         
       </item>
