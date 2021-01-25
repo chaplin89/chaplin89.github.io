@@ -44,6 +44,8 @@ p {
   margin: 0 0 $small-spacing;
 
   &.lead {
+
+  margin-top: 30px;
     font-size: rem(22);
     font-weight: 300;
   }
