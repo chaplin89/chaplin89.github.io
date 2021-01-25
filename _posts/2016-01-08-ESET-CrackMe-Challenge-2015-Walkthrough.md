@@ -1,10 +1,9 @@
 ---
 layout: post
+title: ESET CrackMe Challenge 2015 - Walkthrough
 comments: true
 toc: true
 ---
-
-*Originally posted on [https://quequero.org/2016/01/eset-crackme-challenge-2015-walkthrough/](https://quequero.org/2016/01/eset-crackme-challenge-2015-walkthrough/)*
 
 -------
 *Repo for the project: 

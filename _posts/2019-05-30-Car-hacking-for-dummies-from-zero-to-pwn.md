@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 'Car Hacking For Dummies: From Zero To Pwn'
+title: 'Car Hacking 101'
 comments: true
 toc: true
 ---
