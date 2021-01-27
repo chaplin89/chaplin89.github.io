@@ -4,8 +4,7 @@ title: 'Setup dm-verity on a minimal Debian installation'
 comments: true
 toc: true
 ---
-
-dm-verity is a device-mapper target that provides integrity checking on block devices using a cryptographic digest provided by the kernel crypto API.
+DM-verity is technology (or better, a "device-mapper target") that provides integrity checking on block devices using a cryptographic digest supplied by the kernel crypto API.
 
 # 1 - System installation
 To make dm-verity works, the system should be able to work with a read-only root. 
@@ -83,7 +82,7 @@ mv /boot /old_boot
 mkdir /boot
 ```
 
-At this point, it is possible to reboot the system. The last step is to reconfigure the VM manager's BIOS and make it try to boot the 2nd disk first of all.
+At this point, it is possible to reboot the system. The last step is to reconfigure the VM manager's BIOS to boot the 2nd disk first.
 
 After boot, you can make sure that everything is working by running the command mount without arguments.
 The output should look like this:
@@ -99,7 +98,6 @@ It is possible to do this in 2 ways:
 
 1. By altering the script /init of the initramfs to make it configure the mapper
 2. By specifying a parameter to the kernel that will instruct the kernel to do everything by itself
-
 It is needed to recompile the component in both cases since, by default, neither busybox nor the kernel on a plain Debian 10 installation supports what is required to create the device.
 
 The most straightforward solution is to recompile the kernel. In the tutorial, this is the method that will be used.
@@ -159,9 +157,9 @@ After this, it is possible to reboot the system and make sure everything is work
 Optionally, it is possible to clean the system from temporary files and install/configure other tools, since starting from the next step, the system will be read-only.
 
 # 4 - root in read-only
-Now it is needed to setup the root file-system as read-only to proceed with the activation of dm-verity. This section is divided into two parts, depending on the file-system chosen.
+Now it is needed to setup the root file-system as read-only to proceed with the activation of dm-verity. This section is divided into two parts, depending on 
 
-# 4.1 - squashfs (alternative to step 4.2)
+# 4.1 - Root in read-only - squashfs (alternative to step 4.2)
 To create a squashfs file-system, boot from a Live Linux and mount the root file-system and the home partition:
 
 ```bash
@@ -198,7 +196,7 @@ dd if=./root.squashfs of=/dev/sda1
 sync
 ```
 
-# 4.2 - etx4 (alternative to step 4.1)
+# 4.2 - Root in read-only - etx4 (alternative to step 4.1)
 For ext4, to put the root in read-only, inside ```/etc/fstab``` change the 4th column of the line related to ```/```to specify only "ro".
 At the end, the file should look like this:
 
