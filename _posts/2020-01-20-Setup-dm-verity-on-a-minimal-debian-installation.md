@@ -86,7 +86,7 @@ At this point the system can be rebooted. The last step is to reconfigure the BI
 After boot, you can make sure that everything is working by running the command mount without arguments.
 The output should look like this:
 
-![mount command](/assets/images/dmverity/6%20-%20Mount%20command.png){: .center-image}
+![mount command](/assets/images/dmverity/6%20-%20Mount%20command.png){: .center-image width="1091" height="767"}
 
 It can be seen that ```/dev/sdb1``` is mounted in ```/boot```.
 
