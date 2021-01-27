@@ -4,7 +4,7 @@ pushd .
 
 bundle exec jekyll build
 
-if [ $? -ne 0]; then
+if [ $? -ne 0 ]; then
     return
 fi
 
