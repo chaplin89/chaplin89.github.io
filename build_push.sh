@@ -1,6 +1,13 @@
 #!/bin/bash
 
 pushd .
+
+bundle exec jekyll build
+
+if [ $? -ne 0]; then
+    return
+fi
+
 git add .
 git commit -m "$@"
 git push
