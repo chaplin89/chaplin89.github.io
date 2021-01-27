@@ -157,9 +157,9 @@ After this, it is possible to reboot the system and make sure everything is work
 Optionally, it is possible to clean the system from temporary files and install/configure other tools, since starting from the next step, the system will be read-only.
 
 # 4 - root in read-only
-Now it is needed to setup the root file-system as read-only to proceed with the activation of dm-verity. This section is divided into two parts, depending on 
+Now it is needed to setup the root file-system as read-only to proceed with the activation of dm-verity. This section is divided into two parts, depending on the file-system chosen.
 
-# 4.1 - Root in read-only - squashfs (alternative to step 4.2)
+# 4.1 - squashfs (alternative to step 4.2)
 To create a squashfs file-system, boot from a Live Linux and mount the root file-system and the home partition:
 
 ```bash
@@ -196,7 +196,7 @@ dd if=./root.squashfs of=/dev/sda1
 sync
 ```
 
-# 4.2 - Root in read-only - etx4 (alternative to step 4.1)
+# 4.2 - etx4 (alternative to step 4.1)
 For ext4, to put the root in read-only, inside ```/etc/fstab``` change the 4th column of the line related to ```/```to specify only "ro".
 At the end, the file should look like this:
 
