@@ -5,16 +5,13 @@
     <description>Blog about hacking and other nasty things.</description>
     <link>https://www.chaplinspace.com/</link>
     <atom:link href="https://www.chaplinspace.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 27 Jan 2021 15:32:39 +0100</pubDate>
-    <lastBuildDate>Wed, 27 Jan 2021 15:32:39 +0100</lastBuildDate>
+    <pubDate>Wed, 27 Jan 2021 21:27:04 +0100</pubDate>
+    <lastBuildDate>Wed, 27 Jan 2021 21:27:04 +0100</lastBuildDate>
     <generator>Jekyll v3.9.0</generator>
     
       <item>
         <title>Setup dm-verity on a minimal Debian installation</title>
-        <description>&lt;h1 id=&quot;1---system-installation&quot;&gt;1 - System installation&lt;/h1&gt;
-&lt;p&gt;In order to make dm-verity works, it is needed that the system can work with a read-only root. 
-As a playground a minimal debian installation on a VM can be used. At first create a VM with at least 10GB of space and install Debian. Download and connect to the machine debian-netinst, then start the VM and install Debian.
-Pay attention to select “Separate /home /var and /tmp on partitions”, as shown in the image below.&lt;/p&gt;
+        <description>&lt;p&gt;dm-verity is a device-mapper target that provides integrity checking on block devices using a cryptographic digest provided by the kernel crypto API.&lt;/p&gt;
 
 </description>
         <pubDate>Mon, 20 Jan 2020 00:00:00 +0100</pubDate>
