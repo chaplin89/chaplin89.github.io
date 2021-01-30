@@ -5,8 +5,8 @@
     <description>Blog about hacking and other nasty things.</description>
     <link>https://www.chaplinspace.com/</link>
     <atom:link href="https://www.chaplinspace.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 27 Jan 2021 21:38:59 +0100</pubDate>
-    <lastBuildDate>Wed, 27 Jan 2021 21:38:59 +0100</lastBuildDate>
+    <pubDate>Sat, 30 Jan 2021 13:27:46 +0100</pubDate>
+    <lastBuildDate>Sat, 30 Jan 2021 13:27:46 +0100</lastBuildDate>
     <generator>Jekyll v3.9.0</generator>
     
       <item>
@@ -41,16 +41,16 @@
 
 &lt;hr /&gt;
 
-&lt;p&gt;The ESET CrackMe Challenge 2015 is divided into 2 parts:&lt;/p&gt;
+&lt;p&gt;The ESET CrackMe Challenge 2015 is divided into two parts:&lt;/p&gt;
 
 &lt;ol&gt;
-  &lt;li&gt;This is the one you download from the ESET website. You are asked to reverse a UPX packed executable and find one password (&lt;strong&gt;Drevokokur&lt;/strong&gt;). Then the application decrypts a message with this password that basically asks you to decrypt in the same way some unreferenced data inside the exe. This unreferenced data, once decrypted, gives you a link to download the 2nd part, which is the subject of this document. I won’t discuss the first part any further.&lt;/li&gt;
+  &lt;li&gt;This is the one you download from the ESET website. You are asked to reverse a UPX packed executable and find one password (&lt;strong&gt;Drevokokur&lt;/strong&gt;). Then the application decrypts a message with this password that basically asks you to decrypt in the same way some unreferenced data inside the executable. Once decrypted, this unreferenced data gives you a link to download the 2nd part, which is the subject of this document. I won’t discuss the first part any further.&lt;/li&gt;
   &lt;li&gt;The second part is made of an EXE and a DLL. The files to analyze are two: &lt;strong&gt;EsetCrackme2015.exe&lt;/strong&gt; and &lt;strong&gt;EsetCrackme2015.dll&lt;/strong&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;
 
-&lt;p&gt;The aim of this challenge is to find 3 passwords. The application uses various obfuscation techniques and I have set my goal to get things done with the minimum effort. Given the huge amount of obfuscation/hiding techniques used in this challenge, this paper is only meant as a guide to retrieve the three passwords. I won’t describe a lot of things in detail if you want to deepen some topics you can check the repo linked at the beginning of the post.&lt;/p&gt;
+&lt;p&gt;This challenge aims to find three passwords. The application uses various obfuscation techniques, and I have set my goal to get things done with the minimum effort. Given the huge amount of obfuscation/hiding techniques used in this challenge, this paper is only meant as a guide to retrieve the three passwords. I won’t describe many things in detail if you want to deepen some topics, you can check the repo linked at the beginning of the post.&lt;/p&gt;
 
 &lt;p&gt;Its structure is as follows:&lt;/p&gt;
 
@@ -64,7 +64,7 @@
   &lt;tbody&gt;
     &lt;tr&gt;
       &lt;td&gt;Analysis&lt;/td&gt;
-      &lt;td&gt;Is divided into subfolders. Every subfolder’s name is the ID of a resource (see below) Subfolders contains file related to my analysis, IDA DBs, tools I wrote and, eventually,  the resource itself decrypted (if the original is encrypted).&lt;/td&gt;
+      &lt;td&gt;Is divided into subfolders. Every subfolder’s name is the ID of a resource (see below). Subfolders contain files related to my analysis, IDA DBs, tools I wrote, and, eventually,  the resource itself decrypted (if the original is encrypted).&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td&gt;Resources&lt;/td&gt;
@@ -85,11 +85,11 @@
   &lt;/tbody&gt;
 &lt;/table&gt;
 
-&lt;p&gt;For this challenge I used:&lt;/p&gt;
+&lt;p&gt;For this challenge, I used:&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;IDA Pro as disassembler/frontend of WinDBG for debugging native code (either for the user mode and the kernel mode part)&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://ntinfo.biz/index.html&quot;&gt;D.I.E. (Detect it easy)&lt;/a&gt; to analyze the files&lt;/li&gt;
+  &lt;li&gt;IDA Pro as disassembler/frontend of WinDBG for debugging native code (either for the user mode and the kernel-mode part)&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://ntinfo.biz/index.html&quot;&gt;DIE (Detect it easy)&lt;/a&gt; to analyze the files&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://www.jetbrains.com/decompiler/&quot;&gt;dotPeek&lt;/a&gt; to reverse the .net stuff&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://github.com/0xd4d/de4dot&quot;&gt;de4dot&lt;/a&gt; mainly to rename obfuscated symbols&lt;/li&gt;
   &lt;li&gt;Other tools I wrote from time to time&lt;/li&gt;
@@ -121,9 +121,9 @@ Note: the file is small and a large portion of it is made of digital signature (
 &lt;h2 id=&quot;rationale-1&quot;&gt;Rationale&lt;/h2&gt;
 &lt;p&gt;The application decrypts resource with ID &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;0x0101&lt;/code&gt; using the key “&lt;strong&gt;Irren%20ist%20menschlich&lt;/strong&gt;” (resource ID &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;0x0003&lt;/code&gt;), then enters in a loop.&lt;/p&gt;
 
-&lt;p&gt;In this loop, it repeatedly calls the decrypted resource until its result is not zero. At that time it waits for some events to occur (see below), then it starts from the begin.&lt;/p&gt;
+&lt;p&gt;In this loop, it repeatedly calls the decrypted resource until its result is not zero. At that time, it waits for some events to occur (see below), then it starts from the beginning.&lt;/p&gt;
 
-&lt;p&gt;The application also starts a thread that makes it communicate with every entity that makes a request through the PIPE &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;\\.\pipe\EsetCrackmePipe&lt;/code&gt; (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ID 0x0002&lt;/code&gt;) with a simple protocol:&lt;/p&gt;
+&lt;p&gt;The application also starts a thread that makes it communicate with every entity that requests something through the PIPE &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;\\.\pipe\EsetCrackmePipe&lt;/code&gt; (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ID 0x0002&lt;/code&gt;) with a simple protocol:&lt;/p&gt;
 
 &lt;ol&gt;
   &lt;li&gt;Request
@@ -138,7 +138,7 @@ Note: the file is small and a large portion of it is made of digital signature (
       &lt;li&gt;2 bytes: ID&lt;/li&gt;
       &lt;li&gt;4 bytes: size (if the request is of type 1)&lt;/li&gt;
       &lt;li&gt;N byte: data (if the request is of type 1)
-Type 1 is used to retrieve resources, type 2 is used to signal events.&lt;/li&gt;
+Type 1 is used to retrieve resources; type 2 is used to signal events.&lt;/li&gt;
     &lt;/ol&gt;
   &lt;/li&gt;
 &lt;/ol&gt;
@@ -146,27 +146,27 @@ Type 1 is used to retrieve resources, type 2 is used to signal events.&lt;/li&gt
 &lt;h1 id=&quot;first-password&quot;&gt;First password&lt;/h1&gt;
 &lt;p&gt;In the decrypted routine that is called by the application, a lot of things can happen.&lt;/p&gt;
 
-&lt;p&gt;The first time the resources with ID &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;0x0102&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;0x0103&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;0x0104&lt;/code&gt; are loaded:&lt;/p&gt;
+&lt;p&gt;The first time the resources with ID&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt; 0x0102&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;0x0103&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;0x0104&lt;/code&gt; are loaded:&lt;/p&gt;
 &lt;ol&gt;
   &lt;li&gt;The first is a (simple) virtual machine.&lt;/li&gt;
   &lt;li&gt;The second is the bytecode of a program that uses &lt;a href=&quot;https://www.trustwave.com/Resources/SpiderLabs-Blog/Analyzing-Malware-Hollow-Processes/&quot;&gt;process hollowing&lt;/a&gt; to inject the resource &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;0x0151&lt;/code&gt; in Svchost.exe.&lt;/li&gt;
   &lt;li&gt;The third is the bytecode of a program that can take the resource data, a path in input, and dump the resource in the path.
-I leave out the analysis of the VM for the moment because it is not important for the first password. All we need to know for now is that this program injects something in svchost.exe&lt;/li&gt;
+I leave out the VM analysis for the moment because it is not important for the first password. All we need to know for now is that this program injects something in svchost.exe&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;p&gt;This can be easily seen by the context because if you break at &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;0x00060AEC&lt;/code&gt; (the VM main loop) you’ll see that at some time the process svchost.exe is created suspended, so it’s easy to guess what’s going on. Also, if you look for the processes linked with the GUI that stands out when you open EsetCrackme2015.exe, you’ll see that is svchost.exe and not EsetCrackme2015.exe&lt;/p&gt;
+&lt;p&gt;The context can easily see this because if you break at &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;0x00060AEC&lt;/code&gt; (the VM main loop), you’ll see that at some time, the process svchost.exe is created suspended, so it’s easy to guess what’s going on. Also, if you look for the processes linked with the GUI that stands out when you open EsetCrackme2015.exe, you’ll see that it is svchost.exe and not EsetCrackme2015.exe&lt;/p&gt;
 
-&lt;p&gt;We can see what is injected by dumping the resource on disk after decryption (&lt;a href=&quot;https://github.com/chaplin89/challenges/tree/master/ESET-2015/Resources/0x0151_Injected/Injected.exe&quot;&gt;Resources/0x0151_Injected/Injected.exe&lt;/a&gt;). It doesn’t use any debugging protection, so you can simply attach your debugger to the right instance of svchost.exe and dump process data.&lt;/p&gt;
+&lt;p&gt;We can see what is injected by dumping the resource on disk after decryption (&lt;a href=&quot;https://github.com/chaplin89/challenges/tree/master/ESET-2015/Resources/0x0151_Injected/Injected.exe&quot;&gt;Resources/0x0151_Injected/Injected.exe&lt;/a&gt;). It doesn’t use any debugging protection, so you can attach your debugger to the right instance of svchost.exe and dump process data.&lt;/p&gt;
 
-&lt;p&gt;Analyzing the injected program we can see that it is a very simple dialog based application:&lt;/p&gt;
+&lt;p&gt;Analyzing the injected program, we can see that it is a straightforward dialog-based application:&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/images/Crackme.png&quot; alt=&quot;Eset Crackme&quot; class=&quot;center-image&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;On the button click events, it computes a hash on the inserted password and then compares them against a pre-loaded hash. These hashes are loaded from the main application through the PIPE, then decrypted (ID &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;0xBB01&lt;/code&gt;). The algorithm which is used to compute hash is SHA-1, so I consider this a dead end.&lt;/p&gt;
+&lt;p&gt;It computes a hash on the inserted password and then compares them against a pre-loaded hash on the button click events. These hashes are loaded from the main application through the PIPE, then decrypted (ID &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;0xBB01&lt;/code&gt;). The algorithm which is used to compute hash is SHA-1, so I consider this a dead end.&lt;/p&gt;
 
-&lt;p&gt;The application also starts a thread, that replaces the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;DlgProc&lt;/code&gt; at runtime via &lt;a href=&quot;https://msdn.microsoft.com/en-us/library/windows/desktop/ms633591%28v=vs.85%29.aspx&quot;&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;SetWindowLong&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The application also starts a thread that replaces the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;DlgProc&lt;/code&gt; at runtime via &lt;a href=&quot;https://msdn.microsoft.com/en-us/library/windows/desktop/ms633591%28v=vs.85%29.aspx&quot;&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;SetWindowLong&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p&gt;The new &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;DlgProc&lt;/code&gt; is almost useless but it intercepts the OnClick event and it leads us to the first password because it encodes the first inserted password with a slightly modified BASE64, and compares the result to a pre-loaded string (for other details see &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;0x00072360&lt;/code&gt;). This string is the resource &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;0xBB02&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;The new &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;DlgProc&lt;/code&gt; is almost useless. Still, it intercepts the OnClick event, and it leads us to the first password because it encodes the first inserted password with a slightly modified BASE64 and compares the result to a pre-loaded string (for other details, see &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;0x00072360&lt;/code&gt;). This string is the resource &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;0xBB02&lt;/code&gt;.&lt;/p&gt;
 
 &lt;p&gt;Applying the algorithm conversely on the loaded string, we can see the first password: &lt;strong&gt;Devin Castle&lt;/strong&gt;, a nice place in Slovakia:&lt;/p&gt;
 
@@ -175,21 +175,21 @@ I leave out the analysis of the VM for the moment because it is not important fo
 &lt;h1 id=&quot;second-password&quot;&gt;Second Password&lt;/h1&gt;
 &lt;p&gt;Inserting the first password lets us move to the second stage of the challenge: the driver.&lt;/p&gt;
 
-&lt;p&gt;When a password is inserted correctly, an event is signaled through the PIPE. The thread that manages the PIPE in the main application, records the event and wakes up the main thread. The main thread re-runs the decrypted DLL’s routine. Basing on the event signaled, it can start the VM program &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;0x104&lt;/code&gt; to write some resources somewhere. In the case of the 1st password, this resource is the one with ID &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;0x0152&lt;/code&gt; and the place is the application working directory.&lt;/p&gt;
+&lt;p&gt;When a password is inserted correctly, an event is signaled through the PIPE. The thread that manages the PIPE in the main application records the event and wakes up the main thread. The main thread re-runs the decrypted DLL’s routine. Basing on the event signaled, it can start the VM program &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;0x104&lt;/code&gt; to write some resources somewhere. In the case of the 1st password, this resource is the one with ID&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt; 0x0152&lt;/code&gt;, and the place is the application working directory.&lt;/p&gt;
 
 &lt;p&gt;This resource is a zip folder that contains a Win32 legacy driver that you have to install.&lt;/p&gt;
 
-&lt;p&gt;This driver is a ramdisk, its architecture is more or less the same that you’ll find an example in Microsoft website (see: &lt;a href=&quot;https://github.com/chaplin89/challenges/tree/master/ESET-2015/Analysis/0x0152_Drv.zip/RAMDISK&quot;&gt;Analysis/0x0152_Drv.zip/RAMDISK&lt;/a&gt;). You can read that code to understand the main functionality of this driver.&lt;/p&gt;
+&lt;p&gt;This driver is a ramdisk, its architecture is more or less the same that you’ll find an example on the Microsoft website (see: &lt;a href=&quot;https://github.com/chaplin89/challenges/tree/master/ESET-2015/Analysis/0x0152_Drv.zip/RAMDISK&quot;&gt;Analysis/0x0152_Drv.zip/RAMDISK&lt;/a&gt;). You can read that code to understand the main functionality of this driver.&lt;/p&gt;
 
 &lt;p&gt;There are, of course, some important differences that I’ll explain.&lt;/p&gt;
 
-&lt;p&gt;The routine that changes most is the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;DispatchReadWrite&lt;/code&gt;: basically, the principle is that you write something in the ramdisk then when you read it the driver decrypt what you wrote on the fly. One of the differences between this driver and the MS example is that this driver does not create any symbolic link, so every read/write is done by creating a handle to the device name that is &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;\\?\GLOBALROOT\Device\45736574\&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;The routine that changes most is the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;DispatchReadWrite&lt;/code&gt;: basically, the principle is that you write something in the ramdisk, then when you read it, the driver decrypt what you wrote on the fly. One of the differences between this driver and the MS example is that this driver does not create any symbolic link, so every read/write is done by creating a handle to the device name that is &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;\\?\GLOBALROOT\Device\45736574\&lt;/code&gt;.&lt;/p&gt;
 
-&lt;p&gt;The driver in the “&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;add&lt;/code&gt;” routine starts a bunch of threads that use the PIPE to communicate with the application. The application gives the driver the string “&lt;strong&gt;ESETConst&lt;/strong&gt;” (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ID 0xAA02&lt;/code&gt;) that is used as the name of a registry key and a program for the virtual machine that lies inside the driver (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ID 0xAA06&lt;/code&gt;).&lt;/p&gt;
+&lt;p&gt;The driver in the “&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;add&lt;/code&gt;” routine starts many threads that use the PIPE to communicate with the application. The application gives the driver the string “&lt;strong&gt;ESETConst&lt;/strong&gt;” (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ID 0xAA02&lt;/code&gt;) that is used as the name of a registry key and a program for the virtual machine that lies inside the driver (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ID 0xAA06&lt;/code&gt;).&lt;/p&gt;
 
-&lt;p&gt;This program is the one who decrypts what you write inside the ramdisk.&lt;/p&gt;
+&lt;p&gt;This program is the one that decrypts what you write inside the ramdisk.&lt;/p&gt;
 
-&lt;p&gt;Here we are forced to analyze this VM. I wrote a VM bytecode decompiler in an assembly-like language, you can find it inside &lt;a href=&quot;https://github.com/chaplin89/challenges/tree/master/ESET-2015/Analysis/0x0102_VirtualMachine/VMDecompiler&quot;&gt;Analysis/0x0102_VirtualMachine/VMDecompiler&lt;/a&gt; (it has some minor bug but should always produce valid disassembly):&lt;/p&gt;
+&lt;p&gt;Here we are forced to analyze this VM. I wrote a VM bytecode decompiler in an assembly-like language. You can find it inside &lt;a href=&quot;https://github.com/chaplin89/challenges/tree/master/ESET-2015/Analysis/0x0102_VirtualMachine/VMDecompiler&quot;&gt;Analysis/0x0102_VirtualMachine/VMDecompiler&lt;/a&gt; (it has some minor bug but should always produce valid disassembly):&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/images/vm_decompiler.png&quot; alt=&quot;Decompiler&quot; class=&quot;center-image&quot; /&gt;&lt;/p&gt;
 
@@ -202,22 +202,22 @@ I leave out the analysis of the VM for the moment because it is not important fo
   &lt;li&gt;4 Byte: Size&lt;/li&gt;
   &lt;li&gt;4 Byte: MainOffset&lt;/li&gt;
   &lt;li&gt;4 Byte: library flag
-The signature is compared against a constant (“1337” for app VM, “3713” for driver VM). If the signature does not match, the execution begins from the 1st byte following the header (decryption stub), if it matches, the execution begins from the MainOffset byte following the header.&lt;/li&gt;
+The signature is compared against a constant (“1337” for app VM, “3713” for driver VM). If the signature does not match, the execution begins from the 1st byte following the header (decryption stub); if it matches, the execution begins from the MainOffset byte following the header.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;VM is quite simple. It can support 255 opcodes but only 15 of them are implemented. If the program contains not supported opcodes, the program terminates.&lt;/p&gt;
+&lt;p&gt;VM is quite simple. It can support 255 opcodes, but only 15 of them are implemented. If the program contains not supported opcodes, the program terminates.&lt;/p&gt;
 
-&lt;p&gt;The VM virtualize a stack, 4MB, and a CPU with 16 registers:&lt;/p&gt;
+&lt;p&gt;The VM virtualize a stack, 4 MB, and a CPU with 16 registers:&lt;/p&gt;
 
 &lt;ol&gt;
   &lt;li&gt;Register from 0 to 5 are GP&lt;/li&gt;
   &lt;li&gt;6 is SP&lt;/li&gt;
-  &lt;li&gt;7 is the begin of the loaded program&lt;/li&gt;
+  &lt;li&gt;7 is the beginning of the loaded program&lt;/li&gt;
   &lt;li&gt;8 is loaded program size&lt;/li&gt;
   &lt;li&gt;9 is the library flag&lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;Register from 10 to X, where &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;10&amp;lt;X&amp;lt;16&lt;/code&gt; is a constant passed to the VM, contains some DWORD passed to the VM (input data)
-Here is a brief description of opcodes, for further reference see the file &lt;a href=&quot;https://github.com/chaplin89/challenges/tree/master/ESET-2015/Analysis/0x0102_VirtualMachine/VMOpcodes.xlsx&quot;&gt;Analysis/0x0102_VirtualMachine/VMOpcodes.xlsx&lt;/a&gt;:&lt;/p&gt;
+Here is a brief description of opcodes, for further reference, see the file &lt;a href=&quot;https://github.com/chaplin89/challenges/tree/master/ESET-2015/Analysis/0x0102_VirtualMachine/VMOpcodes.xlsx&quot;&gt;Analysis/0x0102_VirtualMachine/VMOpcodes.xlsx&lt;/a&gt;:&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;Terminate the program.&lt;/li&gt;
   &lt;li&gt;Move data. The destination is a register.&lt;/li&gt;
@@ -226,7 +226,7 @@ Here is a brief description of opcodes, for further reference see the file &lt;a
   &lt;li&gt;Push argument in the stack (load argument in memory pointed by SP and then decrement SP).&lt;/li&gt;
   &lt;li&gt;Pop dword from the stack into a register (copy dword from memory pointed by SP into register then increment SP).&lt;/li&gt;
   &lt;li&gt;Logical operations, the first operand is a register. The operation could be: not equal, equal, minor. If the condition is met, a flag is set.&lt;/li&gt;
-  &lt;li&gt;Jump. This can be conditional, in that case, the IP is updated only if the flag is set.
+  &lt;li&gt;Jump. This can be conditional. In that case, the IP is updated if the flag is set.
 (Virtual) Call. Push IP, then change it with argument.&lt;/li&gt;
   &lt;li&gt;Pop dword from the stack into IP.&lt;/li&gt;
   &lt;li&gt;Arithmetic operations, the first operand is a register. The operation could be: add, sub, left shit, right shift, ROR, ROL, module.&lt;/li&gt;
@@ -237,13 +237,13 @@ Here is a brief description of opcodes, for further reference see the file &lt;a
 
 &lt;p&gt;The VM iterates through every byte in the program and calls the appropriate handler until it finds an exit opcode or an invalid one. The handlers accept a structure (Context) in input that contains the status of the CPU.&lt;/p&gt;
 
-&lt;p&gt;The programs that run inside the driver could be seen in &lt;a href=&quot;https://github.com/chaplin89/challenges/tree/master/ESET-2015/Analysis/0x0152_Drv.zip/VM Programs&quot;&gt;Analysis/0x0152_Drv.zip/VM Programs&lt;/a&gt;. The odd thing is that in this program the registry key (ESETConst) is checked against null but seeing the dispatch RW routine it is easy to spot that the VM can’t start if the Key is null.&lt;/p&gt;
+&lt;p&gt;The programs that run inside the driver could be seen in &lt;a href=&quot;https://github.com/chaplin89/challenges/tree/master/ESET-2015/Analysis/0x0152_Drv.zip/VM Programs&quot;&gt;Analysis/0x0152_Drv.zip/VM Programs&lt;/a&gt;. In this program, the odd thing is that the registry key (ESETConst) is checked against null but seeing the dispatch RW routine, it is easy to spot that the VM can’t start if the key is null.&lt;/p&gt;
 
-&lt;p&gt;In fact, reversing the algorithm we find the 2nd password: &lt;strong&gt;Barbakan Krakowski&lt;/strong&gt; a building in Krakow:&lt;/p&gt;
+&lt;p&gt;In fact, reversing the algorithm, we find the 2nd password: &lt;strong&gt;Barbakan Krakowski&lt;/strong&gt; a building in Krakow:&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/images/BarbakanKrakowski.jpg&quot; alt=&quot;Barbakan Krakowki&quot; class=&quot;center-image&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;I wrote a program to emulate the behaviors of the VM in a high-level language. In &lt;a href=&quot;https://github.com/chaplin89/challenges/tree/master/ESET-2015/Analysis/0x0152_Drv.zip/DriverVMEmulator&quot;&gt;Analysis/0x0152_Drv.zip/DriverVMEmulator&lt;/a&gt; there is a software that decrypts the resource 0x0155 as the driver would do. It can also run the algorithm conversely to find what the registry key should be: Reversing is great&lt;/p&gt;
+&lt;p&gt;I wrote a program to emulate the behaviors of the VM in a high-level language. In &lt;a href=&quot;https://github.com/chaplin89/challenges/tree/master/ESET-2015/Analysis/0x0152_Drv.zip/DriverVMEmulator&quot;&gt;Analysis/0x0152_Drv.zip/DriverVMEmulator&lt;/a&gt;, there is a software that decrypts the resource 0x0155 as the driver would do. It can also run the algorithm conversely to find what the registry key should be: Reversing is great.&lt;/p&gt;
 
 &lt;p&gt;The result of the decryption is this bitmap:&lt;/p&gt;
 
@@ -252,23 +252,23 @@ Here is a brief description of opcodes, for further reference see the file &lt;a
 &lt;h1 id=&quot;third-password&quot;&gt;Third password&lt;/h1&gt;
 &lt;p&gt;Guessing the 2nd password lets us move to the third part of the challenge.&lt;/p&gt;
 
-&lt;p&gt;When you guess the 2nd password, the application writes the resource with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ID 0x0153&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;0x0154&lt;/code&gt; in its working folder. These are 2 .net applications called PunchCardReader.exe and PuncherMachine.exe&lt;/p&gt;
+&lt;p&gt;When you guess the 2nd password, the application writes the resource with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ID 0x0153&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;0x0154&lt;/code&gt; in its working folder. These are two .net applications called PunchCardReader.exe and PuncherMachine.exe.&lt;/p&gt;
 
-&lt;p&gt;Both of them are windows form applications. Both are obfuscated with a custom obfuscator (I guess). The obfuscation schema is the same and it is very simple:&lt;/p&gt;
+&lt;p&gt;Both of them are windows form applications. Both are obfuscated with a custom obfuscator (I guess). The obfuscation schema is the same, and it is straightforward:&lt;/p&gt;
 
-&lt;p&gt;Most of the obfuscation is based on splitting function bodies into different cases inside a switch &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;(num1^num2)&lt;/code&gt;. One of the integers does not change among different loops but other can be reassigned inside the various cases. In this way the next time the loop is executed, it can enter in another case. Every case usually ends with a branch to the switch address:&lt;/p&gt;
+&lt;p&gt;Most of the obfuscation is based on splitting function bodies into different cases inside a switch &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;(num1^num2)&lt;/code&gt;. One of the integers does not change among different loops, but the other can be reassigned inside the various cases. In this way, the next time the loop is executed, it can enter in another case. Every case usually ends with a branch to the switch address:&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/images/DotnetDecompiled.png&quot; alt=&quot;DotNet Decompiled&quot; class=&quot;center-image&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Strings are not directly visible. They are merged together and constitute a blob of data. There are some stub methods, one for each string, that know how to extract strings from this blob of data.
-As various obfuscation schemas do, invalid C# names are used. In IL you can, for example, re-uses the same name for different types, because in IL you always have to fully-qualify everything you use, so there is no ambiguity.
-My first attempt to understand what the software does was to write a plugin for de4dot. I wrote the skeleton of the obfuscator but then I realized that important functions are very little and it is not hard to understand what they do, so I’ve chosen a different approach:&lt;/p&gt;
+As various obfuscation schemas do, invalid C# names are used. In IL, you can, for example, re-use the same name for different types because, in IL, you always have to fully-qualify everything you use, so there is no ambiguity.
+My first attempt to understand what the software does was to write a plugin for de4dot. I wrote the skeleton of the obfuscator, but then I realized that important functions are very small and it is not hard to understand what they do, so I’ve chosen a different approach:&lt;/p&gt;
 
 &lt;p&gt;First of all a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;“de4dot –un-name !.*”&lt;/code&gt; is by default.
 So I’ve used dotPeek to decompile the program and recreate the VS project.
-With very little changes (mainly moving variable declaration) and some textual parsing (see &lt;a href=&quot;https://github.com/chaplin89/challenges/tree/master/ESET-2015/Utility/PunchStringDeob&quot;&gt;Utility/PunchStringDeob&lt;/a&gt;) I was able to compile both projects.&lt;/p&gt;
+With very few changes (mainly moving variable declaration) and some textual parsing (see &lt;a href=&quot;https://github.com/chaplin89/challenges/tree/master/ESET-2015/Utility/PunchStringDeob&quot;&gt;Utility/PunchStringDeob&lt;/a&gt;), I was able to compile both projects.&lt;/p&gt;
 
-&lt;p&gt;In these applications, resources loaded from the main app are decrypted with the AES algorithm in ECB mode (that I think could explain a lack of the entropy at the end of DLL). The key is an MD5 hash computed against the body of some methods that has a particular attribute and the attribute itself. Of course, when I recreated the project in VS the MD5 hash has changed, so I wrote a program that emulates the hash computation using the original file as input, then I hardcoded the key in the recompiled programs to make things work (see &lt;a href=&quot;https://github.com/chaplin89/challenges/tree/master/ESET-2015/Utility/ExtractKey&quot;&gt;Utility/ExtractKey&lt;/a&gt;).&lt;/p&gt;
+&lt;p&gt;In these applications, resources loaded from the main app are decrypted with the AES algorithm in ECB mode (which I think could explain a lack of entropy at the end of DLL). The key is an MD5 hash computed against the body of some methods that has a particular attribute and the attribute itself. Of course, when I recreated the project in VS, the MD5 hash has changed, so I wrote a program that emulates the hash computation using the original file as input, then I hardcoded the key in the recompiled programs to make things work (see &lt;a href=&quot;https://github.com/chaplin89/challenges/tree/master/ESET-2015/Utility/ExtractKey&quot;&gt;Utility/ExtractKey&lt;/a&gt;).&lt;/p&gt;
 
 &lt;h1 id=&quot;meet-punchermachineexe&quot;&gt;Meet PuncherMachine.exe&lt;/h1&gt;
 &lt;p&gt;Once open, it shows this image:&lt;/p&gt;
@@ -282,49 +282,49 @@ With very little changes (mainly moving variable declaration) and some textual p
 &lt;p&gt;There are some odd things inside &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;PuncherMachine.exe&lt;/code&gt; that promptly stand out.&lt;/p&gt;
 
 &lt;p&gt;It tries to refer to a resource named “&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;resource0&lt;/code&gt;” and there is no such resource in the assembly.
-It tries to retrieve a resource from the main application with ID &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;0xFF03&lt;/code&gt; and there is no such resource in the DLL.
-You can make the application find &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;resource0&lt;/code&gt; into the assembly or you can perform a “man in the middle” attack through the PIPE to inject the resource, the result is pretty much the same: a hash is computed on this resource and is checked against the hash of the file that you choose from the file dialog. If it matches, the software leads you to the 2nd stage, if it doesn’t match an “&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Invalid punchcard!&lt;/code&gt;” message is shown.&lt;/p&gt;
+It tries to retrieve a resource from the main application with ID&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt; 0xFF03&lt;/code&gt;, and there is no such resource in the DLL.
+You can make the application find &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;resource0&lt;/code&gt; into the assembly, or you can perform a “man in the middle” attack through the PIPE to inject the resource; the result is pretty much the same: a hash is computed on this resource and is checked against the hash of the file that you choose from the file dialog. If it matches, the software leads you to the 2nd stage; if it doesn’t match, an “&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Invalid punchcard!&lt;/code&gt;” message is shown.&lt;/p&gt;
 
-&lt;p&gt;If the application doesn’t find one or the other, it checks the hash of the input file against an unknown hash (resource ID &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;0xFF02&lt;/code&gt;): &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;95eceaa118dd081119e26be1c44da2cb&lt;/code&gt;. Then the check fails because I don’t have the file that has that MD5 hash, but maybe I’m missing something here. In fact, I’m quite sure that there is far more than it seems in the bitmap. Of course, a bitmap full of noise seems very strange in a challenge that is stuffed with mysteries. My guess is that there is another bitmap that can be decoded starting from the first, and that bitmap has the required hash. By the way, I haven’t spent time on this because the bitmap plays a minor role in this process and it is not functional to retrieve the 3rd password. Also, as I’ll explain later, this bitmap although I think is decoded well, does not allow me to complete the challenge.&lt;/p&gt;
+&lt;p&gt;If the application doesn’t find one or the other, it checks the hash of the input file against an unknown hash (resource ID &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;0xFF02&lt;/code&gt;): &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;95eceaa118dd081119e26be1c44da2cb&lt;/code&gt;. Then the check fails because I don’t have the file that has that MD5 hash, but maybe I’m missing something here. In fact, I’m quite sure that there is far more than it seems in the bitmap. Of course, a bitmap full of noise seems very strange in a challenge that is stuffed with mysteries. My guess is that there is another bitmap that can be decoded starting from the first, and that bitmap has the required hash. By the way, I haven’t spent time on this because the bitmap plays a minor role in this process, and it is not functional to retrieve the 3rd password. Also, as I’ll explain later, this bitmap, although I think it is decoded well, does not allow me to complete the challenge.&lt;/p&gt;
 
-&lt;p&gt;At this point I made the recompiled software load “&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;resource0”&lt;/code&gt;, that is my bitmap.&lt;/p&gt;
+&lt;p&gt;At this point, I made the recompiled software load “&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;resource0”&lt;/code&gt;, which is my bitmap.&lt;/p&gt;
 
-&lt;p&gt;Selecting a valid bitmap make the GUI change:&lt;/p&gt;
+&lt;p&gt;Selecting a valid bitmap makes the GUI change:&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/images/PuncherMachine_2.png&quot; alt=&quot;Puncher machine 2&quot; class=&quot;center-image&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;I’m asked to insert 2 strings: calibration code 1 and calibration code 2.&lt;/p&gt;
+&lt;p&gt;I’m asked to insert two strings: calibration code one and calibration code 2.&lt;/p&gt;
 
-&lt;p&gt;Seeing the handler to the “Calibrate!” button click I can see that “&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Calibration code 1&lt;/code&gt;” is given in input to a method of an assembly.&lt;/p&gt;
+&lt;p&gt;Seeing the handler to the “Calibrate!” button click, I can see that “&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Calibration code 1&lt;/code&gt;” is given in input to a method of an assembly.&lt;/p&gt;
 
-&lt;p&gt;The assembly is obtained through PIPE (resource ID &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;0xFF04&lt;/code&gt;) and the method is called “&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;createMethod&lt;/code&gt;”.&lt;/p&gt;
+&lt;p&gt;The assembly is obtained through PIPE (resource ID &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;0xFF04&lt;/code&gt;), and the method is called “&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;createMethod&lt;/code&gt;”.&lt;/p&gt;
 
-&lt;p&gt;After dumping the assembly on disk I could analyze it (see &lt;a href=&quot;https://github.com/chaplin89/challenges/tree/master/ESET-2015/Analysis/0xFF04_CalibrationDynMethod.dll/CalibrationDynMethod&quot;&gt;Analysis/0xFF04_CalibrationDynMethod.dll/CalibrationDynMethod&lt;/a&gt; for full code). The assembly is very simple and luckily is not obfuscated. It can create the skeleton of a method with Reflection.Emit classes. In this skeleton, some instructions are missing. The method uses the input constants as hashes to decide which opcode to emit so understanding what the generated function should do is the first step to decide which opcode should be there. It is not that hard because it contains some hardcoded constants and searching these constants on Google it comes out that this is the “Knuth Hash” algorithm and the missing instructions are then: ldarg.0 and mul.&lt;/p&gt;
+&lt;p&gt;After dumping the assembly on the disk, I could analyze it (see &lt;a href=&quot;https://github.com/chaplin89/challenges/tree/master/ESET-2015/Analysis/0xFF04_CalibrationDynMethod.dll/CalibrationDynMethod&quot;&gt;Analysis/0xFF04_CalibrationDynMethod.dll/CalibrationDynMethod&lt;/a&gt; for full code). The assembly is very simple and, luckily, is not obfuscated. It can create the skeleton of a method with Reflection.Emit classes. In this skeleton, some instructions are missing. The method uses the input constants as hashes to decide which opcode to emit, so understanding what the generated function should do is the first step to decide which opcode should be there. It is not that hard because it contains some hardcoded constants, and searching these constants on Google, it comes out that this is the “Knuth Hash” algorithm and the missing instructions are then: ldarg.0 and mul.&lt;/p&gt;
 
 &lt;p&gt;Basing on this, the Calibration code 1 should be &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;0364ABE72D29C96C&lt;/code&gt; (see &lt;a href=&quot;https://github.com/chaplin89/challenges/tree/master/ESET-2015/Analysis/0xFF04_CalibrationDynMethod.dll/CalibrationDynMethod_HashTable.txt&quot;&gt;Analysis/0xFF04_CalibrationDynMethod.dll/CalibrationDynMethod_HashTable.txt&lt;/a&gt;).&lt;/p&gt;
 
-&lt;p&gt;The created method is then called in a loop. Every char of the calibration code 2 is added to a char in a list, then the Knuth Hash is computed based on this input. Every hash in output, then, should be the key of a hashtable for the “calibration process” to be successful. This hashtable is the resource &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;0xFF00&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;The created method is then called inside a loop. Every char of the calibration code two is added to a char in a list, and then the Knuth Hash is computed based on this input. Every hash in output, then, should be the key of a hashtable for the “calibration process” to be successful. This hashtable is the resource &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;0xFF00&lt;/code&gt;.&lt;/p&gt;
 
 &lt;p&gt;It comes out that the only string that met this condition is “&lt;strong&gt;Infant Jesus of Prague&lt;/strong&gt;” (that it is also the third password), a statue in Prague:&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/images/InfantJesus.jpg&quot; alt=&quot;Infant Jesus of prague&quot; class=&quot;center-image&quot; /&gt;&lt;/p&gt;
 
 &lt;h1 id=&quot;4th-condition&quot;&gt;4th Condition&lt;/h1&gt;
-&lt;p&gt;Honestly, at this point, my interest in the Eset CrackMe Challenge 2015 really dropped down. I found the 2nd password interesting to find (with my actual skills) and I was expecting some kind of escalation, but the third one is actually way too boring and way too easy compared to the 2nd, also bearing in mind that I’m a complete newbie with the .net stuff (the VM decompiler is actually my hello-world in C#) and so my expectations were greatly disillusioned.&lt;/p&gt;
+&lt;p&gt;Honestly, at this point, my interest in the challenge really dropped down. It was fun to learn IL and C# a little bit to found the 2nd password, and I was expecting some kind of escalation, but the third one is actually way too boring and way too easy compared to the 2nd. So my expectations were disillusioned.&lt;/p&gt;
 
-&lt;p&gt;The truth is that it was hard to stay in the right mood in order to continue the challenge and I continued until I could do things that required limited effort, but I gave up at the real end because I thought it wasn’t fun anymore.&lt;/p&gt;
+&lt;p&gt;The truth is that it was hard to stay in the right mood in order to continue the challenge, and I continued until I could do things that required limited effort, but I gave up at the real end because I thought it wasn’t fun anymore.&lt;/p&gt;
 
-&lt;p&gt;By the way, if you want I have paved the way and you have all you need in order to finish the challenge, maybe you can prove I was wrong.&lt;/p&gt;
+&lt;p&gt;By the way, if you want, I have paved the way, and you have all you need in order to finish the challenge; maybe you can prove I was wrong.&lt;/p&gt;
 
 &lt;p&gt;Ok, enough blah-blah, back to the challenge.&lt;/p&gt;
 
-&lt;p&gt;If you look inside &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;0x10000CDD&lt;/code&gt; you’ll see that there are 4 conditions to meet in order to make the application show you a greeting message. 3 of them are events fired when you enter the right passwords. A 4th condition is an event fired by PunchCardReader.exe, we’ll get there.&lt;/p&gt;
+&lt;p&gt;If you look inside &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;0x10000CDD&lt;/code&gt;, you’ll see that there are four conditions to meet in order to make the application show you a greeting message. Three of them are events fired when you enter the right passwords. A 4th condition is an event fired by PunchCardReader.exe; we’ll get there.&lt;/p&gt;
 
 &lt;p&gt;What matter for the moment is that when you enter the valid calibration codes, the GUI changes:&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/images/4thCondition.png&quot; alt=&quot;Calibrated&quot; class=&quot;center-image&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;As you can see on the “PunchIt!” button handler, it can encode the string that you insert in the bitmap that then is written on disk with name punch_card_XXX.bmp (where XXX is in range 000-999) with a fancy animation and a very relaxing background noise.&lt;/p&gt;
+&lt;p&gt;As you can see on the “PunchIt!” button handler, it can encode the string that you insert in the bitmap that is then written on disk with the name punch_card_XXX.bmp (where XXX is in the range 000-999) with a fancy animation and a very relaxing background noise.&lt;/p&gt;
 
 &lt;p&gt;The next step is to figure out what should be encoded in bitmaps.&lt;/p&gt;
 
@@ -335,11 +335,11 @@ You can make the application find &lt;code class=&quot;language-plaintext highli
 
 &lt;p&gt;This is another windows form application. It just has one button in the interface: “&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Read punch card&lt;/code&gt;”.&lt;/p&gt;
 
-&lt;p&gt;The principle, of course, is to produce some “punch cards” from PuncherMachine.exe then read these “punch cards” from PunchCardReader.exe&lt;/p&gt;
+&lt;p&gt;The principle, of course, is to produce some “punch cards” from PuncherMachine.exe then read these “punch cards” from PunchCardReader.exe.&lt;/p&gt;
 
-&lt;p&gt;Seeing the disassembled program, it could be easily seen that punch cards are decoded into a string. These strings are passed to the method of an assembly.&lt;/p&gt;
+&lt;p&gt;In the disassembled program, it could be easily seen that punch cards are decoded into a string. These strings are passed to the method of an assembly.&lt;/p&gt;
 
-&lt;p&gt;The assembly is the resource &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;0xFF05&lt;/code&gt; and it is very similar to the former. It now accepts a string array that is used as IL instructions inside the skeleton of the method. So inside these bitmaps, created by PuncherMachine.exe, there should be encoded a list of IL instructions.&lt;/p&gt;
+&lt;p&gt;The assembly is the resource &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;0xFF05&lt;/code&gt;, and it is very similar to the former. It now accepts a string array that is used as IL instructions inside the skeleton of the method. So inside these bitmaps, created by PuncherMachine.exe, there should be encoded a list of IL instructions.&lt;/p&gt;
 
 &lt;p&gt;Seeing the assembly, it could easily be spotted what these instructions should be. The code does pretty much this:&lt;/p&gt;
 
@@ -355,21 +355,20 @@ You can make the application find &lt;code class=&quot;language-plaintext highli
   &lt;li&gt;z = &lt;strong&gt;ret&lt;/strong&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;Punching the bitmap with mul, add and ret does not let PunchCardReader.exe validate the bitmaps although these seem to be the right strings. I spent very little time on this but I think that it is due to the fact that the original bitmap is wrong, and this does not let the decoding process to work well.&lt;/p&gt;
+&lt;p&gt;Punching the bitmap with mul, add and ret does not let PunchCardReader.exe validate the bitmaps, although these seem to be the right strings. I spent very little time on this, but I think that it is due to the fact that the original bitmap is wrong, and this does not let the decoding process work well.&lt;/p&gt;
 
-&lt;p&gt;If this assumption is correct, I think that 2 hypotheses are the most plausible:&lt;/p&gt;
+&lt;p&gt;If this assumption is correct, I think that two hypotheses are the most plausible:&lt;/p&gt;
 
 &lt;ol&gt;
-  &lt;li&gt;The re-implementation in C# of the VM program that runs inside the driver is bugged. At first glance this seems unlikely to me because it produces an overall valid bitmap, but who knows.&lt;/li&gt;
-  &lt;li&gt;There is another bitmap that can be extracted from the 1st in some way (like trying to decrypt the content of the bitmap, XOR it or whatever). That bitmap is the one that has the unknown hash and will allow the decoding process to work well.
+  &lt;li&gt;The re-implementation in C# of the VM program that runs inside the driver is bugged. At first glance, this seems unlikely to me because it produces an overall valid bitmap, but who knows.&lt;/li&gt;
+  &lt;li&gt;There is another bitmap that can be extracted from the 1st in some way (like trying to decrypt the content of the bitmap, XOR it, or whatever). That bitmap is the one that has the unknown hash and will allow the decoding process to work well.
     &lt;h1 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h1&gt;
     &lt;p&gt;That’s all!
 After all, it is a nice crackme. I think the VM part is the best because it is very well written and stable. Kudos to the authors.&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;p&gt;Looking forward to the 2016 challenge, bye.&lt;/p&gt;
-
+&lt;p&gt;I am looking forward to the 2016 challenge bye.&lt;/p&gt;
 </description>
         <pubDate>Fri, 08 Jan 2016 00:00:00 +0100</pubDate>
         <link>https://www.chaplinspace.com/2016/ESET-CrackMe-Challenge-2015-Walkthrough/</link>
