@@ -9,3 +9,7 @@
 @import "lists";
 @import "tables";
 @import "typography";
+
+.nowrap{
+    @extend .highlight;
+  }

@@ -103,6 +103,31 @@
   <script text/javascript src="{{ "/assets/js/jquery-3.4.1.slim.min.js" | prepend: site.baseurl | prepend: site.url }}" >
   </script>
 
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: [
+      "MathMenu.js",
+      "MathZoom.js",
+      "AssistiveMML.js",
+      "a11y/accessibility-menu.js"
+    ],
+    jax: ["input/TeX", "output/CommonHTML"],
+    TeX: {
+      extensions: [
+        "AMSmath.js",
+        "AMSsymbols.js",
+        "noErrors.js",
+        "noUndefined.js",
+      ]
+    }
+  });
+</script>
+
+  <!-- MathJax -->
+  <script type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+
   <script>
     $(document).ready(function () {
       jQuery('.fa-bars').on('click', function () {
