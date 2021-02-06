@@ -5,8 +5,8 @@
     <description>Blog about hacking and other nasty things.</description>
     <link>https://www.chaplinspace.com/</link>
     <atom:link href="https://www.chaplinspace.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 06 Feb 2021 23:52:44 +0100</pubDate>
-    <lastBuildDate>Sat, 06 Feb 2021 23:52:44 +0100</lastBuildDate>
+    <pubDate>Sun, 07 Feb 2021 00:04:50 +0100</pubDate>
+    <lastBuildDate>Sun, 07 Feb 2021 00:04:50 +0100</lastBuildDate>
     <generator>Jekyll v3.9.0</generator>
     
       <item>
@@ -18,7 +18,7 @@ At the time of the writing, the malware is actually undetected by most AV.&lt;/p
 &lt;ul&gt;
   &lt;li&gt;Name: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;setup.exe&lt;/code&gt;&lt;/li&gt;
   &lt;li&gt;md5: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;393dbb217ad0524bf1af36988fd0d3fe&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;sha512: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;6dd6bd53bb9f17a9cd1aaf8d0f82f73d2aaca9becf010d7a7a4646a4cd01c5a6f3a211d09e94812fee5478d8c3c85fecc498d4ac8757dbaa037e166ba263fe89&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;sha256: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;aa777fea172dab773f075f80648c24dfdcb7997c6085917323c30c82fb988626&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;It seems it is active from 25/01, and it seems to come from Russia.
@@ -312,7 +312,7 @@ In details, the operations done by the malware are:&lt;/p&gt;
 &lt;ul&gt;
   &lt;li&gt;name: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;School.exe&lt;/code&gt;&lt;/li&gt;
   &lt;li&gt;md5sum: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;6d1b332ccbfaa72d689719d83ca0d4ad&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;sha512: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;622cac4816b30c10d34f2def84d6df919bb283543fe5166a757f4de54c25a0c4b7ece0acc264b5dfa4d829cfbbb5d7d6388e29aeefbff22943eded27a73c7127&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;sha256: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;20bb00941c700b886509fae81b7081847c4600f9cf9919270792a07e9bbb72aa&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h2 id=&quot;videocardvbs&quot;&gt;VideoCard.vbs&lt;/h2&gt;
