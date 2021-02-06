@@ -5,9 +5,337 @@
     <description>Blog about hacking and other nasty things.</description>
     <link>https://www.chaplinspace.com/</link>
     <atom:link href="https://www.chaplinspace.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 30 Jan 2021 13:34:28 +0100</pubDate>
-    <lastBuildDate>Sat, 30 Jan 2021 13:34:28 +0100</lastBuildDate>
+    <pubDate>Sat, 06 Feb 2021 23:51:15 +0100</pubDate>
+    <lastBuildDate>Sat, 06 Feb 2021 23:51:15 +0100</lastBuildDate>
     <generator>Jekyll v3.9.0</generator>
+    
+      <item>
+        <title>Unknown malware analysis</title>
+        <description>&lt;p&gt;This post is about a malware I analyzed in the last few days.
+At the time of the writing, the malware is actually undetected by most AV.&lt;/p&gt;
+
+&lt;p&gt;The malware was downloaded from: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;hxxp://52.200.29.1/~arichve/index.php?t=1612270025&amp;amp;q=Download%20KMSpico&lt;/code&gt; in a password-protected zip file:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Name: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;setup.exe&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;md5: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;393dbb217ad0524bf1af36988fd0d3fe&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;sha512: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;6dd6bd53bb9f17a9cd1aaf8d0f82f73d2aaca9becf010d7a7a4646a4cd01c5a6f3a211d09e94812fee5478d8c3c85fecc498d4ac8757dbaa037e166ba263fe89&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;It seems it is active from 25/01, and it seems to come from Russia.
+It is divided into different parts, and the first is an SFX.&lt;/p&gt;
+
+&lt;p&gt;At startup, it will decompress the resource &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CABINET&lt;/code&gt; (a cab archive indeed) inside &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;%TEMP%\IXP000.TMP\&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;The extracted files are:&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Attira.xlxs&lt;/code&gt;: base64 encoded file.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;San.vst&lt;/code&gt;: base64 encoded file.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Pensa.vmw&lt;/code&gt;: binary file.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Piu.xlxt&lt;/code&gt;: binary file.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h1 id=&quot;1---attiraxlxs&quot;&gt;1 - Attira.xlxs&lt;/h1&gt;
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Attira.xlxs&lt;/code&gt; is decoded into &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Baciocchi.tif&lt;/code&gt; and executed with the command &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cmd /c certutil -decode Attira.xlxs Baciocchi.tif &amp;amp; cmd &amp;lt; Baciocchi.tif&lt;/code&gt;
+It is an obfuscated batch file. Most of the instructions are merely invalid and inserted to confuse. 
+The few good instructions are obfuscated by replacing each command’s character with a variable; the prompt will expand during runtime.&lt;/p&gt;
+
+&lt;p&gt;It is straightforward to remove all the invalid instructions by removing every match with this regex: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;^(?!Set|%).*\r\n&lt;/code&gt;.
+To understand the content, it’s enough to execute it; the prompt will show the expanded values:&lt;/p&gt;
+
+&lt;div class=&quot;language-batch highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;findstr&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;/V /R &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;^x&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;BNrnPvttDwqGEHkfIgKhBSsstAiSfcnxclqsMiuANCVJpmuvGVfWYlTIvMzgfjOiCFlzHTCBolAYWHoFzLkzuBvkssUqNRlANNuDgNPMzNONJUM$&quot;&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;Pensa&lt;/span&gt;.wmv  &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;Affluisce&lt;/span&gt;.com
+&lt;span class=&quot;nb&quot;&gt;certutil&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;-decode &lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;San&lt;/span&gt;.vst &lt;span class=&quot;kd&quot;&gt;f&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;start&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;Affluisce&lt;/span&gt;.com &lt;span class=&quot;kd&quot;&gt;f&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;ping&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;127&lt;/span&gt;.0.0.1 &lt;span class=&quot;na&quot;&gt;-n &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;30&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The command above is ripping the file &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Affluisce.com&lt;/code&gt; from &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Pensa.vmw&lt;/code&gt; and decoding &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;San.vst&lt;/code&gt; into &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;f&lt;/code&gt;. At this point is starting &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Affluisce.com&lt;/code&gt; passing &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;f&lt;/code&gt; as input argument.
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Affluisce.com&lt;/code&gt; is an AutoIt interpreter, and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;f&lt;/code&gt; is indeed an obfuscated AutoIt script.&lt;/p&gt;
+
+&lt;h1 id=&quot;2---sanvst&quot;&gt;2 - San.vst&lt;/h1&gt;
+&lt;p&gt;The AutoIt script is obfuscated using control-flow flattening, string encryption, and variable renaming.&lt;/p&gt;
+
+&lt;h2 id=&quot;deobfuscation&quot;&gt;Deobfuscation&lt;/h2&gt;
+&lt;p&gt;After a rapid review, it is possible to understand that a function is used a lot: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;aeNNZK&lt;/code&gt;. This function is indeed decoding obfuscated strings.
+I wrote a very simple AutoIt script to replace the calls to this function with the actual value. Is not needed to go this deeper in the analysis of the script, I just wanted to do it for fun:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$sFileName&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'.\f'&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$sOutputFileName&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'.\f_plaintext_string.au3'&lt;/span&gt;
+
+Func DeobfuscateString&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;a,b&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+   &lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; Here goes the code of the &lt;span class=&quot;k&quot;&gt;function &lt;/span&gt;that does the decryption: aeNNZK
+EndFunc
+
+Func PerformDeobfuscation&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;ByRef &lt;span class=&quot;nv&quot;&gt;$FileContent&lt;/span&gt;, &lt;span class=&quot;nv&quot;&gt;$FirstCharacter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+   &lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; Call to the &lt;span class=&quot;k&quot;&gt;function &lt;/span&gt;have the syntax:
+   &lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;  aennzk&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;text&quot;&lt;/span&gt;, number&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+
+   &lt;span class=&quot;nv&quot;&gt;$Start&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$FirstCharacter&lt;/span&gt;
+   &lt;span class=&quot;nv&quot;&gt;$FunctionCall&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; StringInStr&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$FileContent&lt;/span&gt;, &lt;span class=&quot;s2&quot;&gt;&quot;aeNNZK&quot;&lt;/span&gt;, &lt;span class=&quot;nv&quot;&gt;$STR_NOCASESENSE&lt;/span&gt;, 1, &lt;span class=&quot;nv&quot;&gt;$Start&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+   If &lt;span class=&quot;nv&quot;&gt;$FunctionCall&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; 0 Then
+     &lt;span class=&quot;k&quot;&gt;return &lt;/span&gt;0
+   EndIf
+
+   &lt;span class=&quot;nv&quot;&gt;$FirstParenthesis&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; StringInStr&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$FileContent&lt;/span&gt;, &lt;span class=&quot;s2&quot;&gt;&quot;(&quot;&lt;/span&gt;, &lt;span class=&quot;nv&quot;&gt;$STR_NOCASESENSE&lt;/span&gt;, 1, &lt;span class=&quot;nv&quot;&gt;$FunctionCall&lt;/span&gt;+1&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+   &lt;span class=&quot;nv&quot;&gt;$FirstQuote&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; StringInStr&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$FileContent&lt;/span&gt;, &lt;span class=&quot;s1&quot;&gt;'&quot;'&lt;/span&gt;, &lt;span class=&quot;nv&quot;&gt;$STR_NOCASESENSE&lt;/span&gt;, 1, &lt;span class=&quot;nv&quot;&gt;$FunctionCall&lt;/span&gt;+1&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+   &lt;span class=&quot;nv&quot;&gt;$SecondQuote&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; StringInStr&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$FileContent&lt;/span&gt;, &lt;span class=&quot;s1&quot;&gt;'&quot;'&lt;/span&gt;, &lt;span class=&quot;nv&quot;&gt;$STR_NOCASESENSE&lt;/span&gt;, 1, &lt;span class=&quot;nv&quot;&gt;$FirstQuote&lt;/span&gt;+1&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+   &lt;span class=&quot;nv&quot;&gt;$FirstComma&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; StringInStr&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$FileContent&lt;/span&gt;, &lt;span class=&quot;s2&quot;&gt;&quot;,&quot;&lt;/span&gt;, &lt;span class=&quot;nv&quot;&gt;$STR_NOCASESENSE&lt;/span&gt;, 1, &lt;span class=&quot;nv&quot;&gt;$SecondQuote&lt;/span&gt;+1&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+   &lt;span class=&quot;nv&quot;&gt;$SecondParenthesis&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; StringInStr&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$FileContent&lt;/span&gt;, &lt;span class=&quot;s2&quot;&gt;&quot;)&quot;&lt;/span&gt;, &lt;span class=&quot;nv&quot;&gt;$STR_NOCASESENSE&lt;/span&gt;, 1, &lt;span class=&quot;nv&quot;&gt;$FirstComma&lt;/span&gt;+1&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+
+   &lt;span class=&quot;nv&quot;&gt;$FirstParameter&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; StringMid&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$FileContent&lt;/span&gt;, &lt;span class=&quot;nv&quot;&gt;$FirstQuote&lt;/span&gt;+1, &lt;span class=&quot;nv&quot;&gt;$SecondQuote&lt;/span&gt; - &lt;span class=&quot;nv&quot;&gt;$FirstQuote&lt;/span&gt; - 1&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+   &lt;span class=&quot;nv&quot;&gt;$SecondParameter&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; StringMid&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$FileContent&lt;/span&gt;, &lt;span class=&quot;nv&quot;&gt;$FirstComma&lt;/span&gt;+1, &lt;span class=&quot;nv&quot;&gt;$SecondParenthesis&lt;/span&gt; - &lt;span class=&quot;nv&quot;&gt;$FirstComma&lt;/span&gt; - 1&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+   &lt;span class=&quot;nv&quot;&gt;$SecondParameter&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; StringStripWS&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$SecondParameter&lt;/span&gt;,   &lt;span class=&quot;nv&quot;&gt;$STR_STRIPALL&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+   &lt;span class=&quot;nv&quot;&gt;$SecondParameter&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; Number&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$SecondParameter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+
+   &lt;span class=&quot;nv&quot;&gt;$All&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; StringMid&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$FileContent&lt;/span&gt;, &lt;span class=&quot;nv&quot;&gt;$FunctionCall&lt;/span&gt;, &lt;span class=&quot;nv&quot;&gt;$SecondParenthesis&lt;/span&gt; - &lt;span class=&quot;nv&quot;&gt;$FunctionCall&lt;/span&gt; + 1&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+   &lt;span class=&quot;nv&quot;&gt;$Computed&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&quot;'&lt;/span&gt; &amp;amp; DeobfuscateString&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$FirstParameter&lt;/span&gt;, &lt;span class=&quot;nv&quot;&gt;$SecondParameter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &amp;amp; &lt;span class=&quot;s1&quot;&gt;'&quot;'&lt;/span&gt;
+
+   &lt;span class=&quot;nv&quot;&gt;$FileContent&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; StringReplace&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$FileContent&lt;/span&gt;, &lt;span class=&quot;nv&quot;&gt;$All&lt;/span&gt;, &lt;span class=&quot;nv&quot;&gt;$Computed&lt;/span&gt;, 1&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+   &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$FunctionCall&lt;/span&gt; + StringLen&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$Computed&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+EndFunc
+
+&lt;span class=&quot;nv&quot;&gt;$hFilehandle&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; FileOpen&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$sFileName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$Content&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; FileRead&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$hFileHandle&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+FileClose&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$hFileHandle&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;nv&quot;&gt;$Position&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 1
+While &lt;span class=&quot;nv&quot;&gt;$Position&lt;/span&gt; &amp;lt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; 0
+   &lt;span class=&quot;nv&quot;&gt;$Position&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; PerformDeobfuscation&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$Content&lt;/span&gt;, &lt;span class=&quot;nv&quot;&gt;$Position&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+Wend
+
+&lt;span class=&quot;nv&quot;&gt;$output&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; FileOpen&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$sOutputFileName&lt;/span&gt;, &lt;span class=&quot;nv&quot;&gt;$FO_OVERWRITE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+FileWrite&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$output&lt;/span&gt;, &lt;span class=&quot;nv&quot;&gt;$Content&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+FileClose&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$output&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;After running this script, the output will be much more understandable.
+The CFG flattening is nothing special; it is possible to recognize a straightforward pattern that will make it useless: only one branch is executed; the others are never.&lt;/p&gt;
+
+&lt;p&gt;I wrote another AutoIt script to remove this protection:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;#NoTrayIcon&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;#include &amp;lt;Constants.au3&amp;gt;&lt;/span&gt;
+
+&lt;span class=&quot;nv&quot;&gt;$sFileName&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'.\f_plaintext_string.au3'&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$sOutputFileName&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;.&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\f&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;_cfg_reconstructed.au3&quot;&lt;/span&gt;
+
+
+Func PerformDeobfuscation&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;ByRef &lt;span class=&quot;nv&quot;&gt;$FileContent&lt;/span&gt;, &lt;span class=&quot;nv&quot;&gt;$FirstCharacter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+
+   &lt;span class=&quot;nv&quot;&gt;$Start&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$FirstCharacter&lt;/span&gt;
+   &lt;span class=&quot;nv&quot;&gt;$Switch&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; StringInStr&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$FileContent&lt;/span&gt;, &lt;span class=&quot;s2&quot;&gt;&quot;Switch&quot;&lt;/span&gt;, &lt;span class=&quot;nv&quot;&gt;$STR_NOCASESENSE&lt;/span&gt;, 1, &lt;span class=&quot;nv&quot;&gt;$Start&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+   If &lt;span class=&quot;nv&quot;&gt;$Switch&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; 0 Then
+     &lt;span class=&quot;k&quot;&gt;return &lt;/span&gt;0
+   EndIf
+
+   &lt;span class=&quot;nv&quot;&gt;$VarBegin&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; StringInStr&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$FileContent&lt;/span&gt;, &lt;span class=&quot;s2&quot;&gt;&quot;$&quot;&lt;/span&gt;, &lt;span class=&quot;nv&quot;&gt;$STR_NOCASESENSE&lt;/span&gt;, 1, &lt;span class=&quot;nv&quot;&gt;$Switch&lt;/span&gt;+1&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+   &lt;span class=&quot;nv&quot;&gt;$VarEnd&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; StringInStr&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$FileContent&lt;/span&gt;, @CRLF, &lt;span class=&quot;nv&quot;&gt;$STR_NOCASESENSE&lt;/span&gt;, 1, &lt;span class=&quot;nv&quot;&gt;$VarBegin&lt;/span&gt;+1&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+   &lt;span class=&quot;nv&quot;&gt;$VarName&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; StringMid&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$FileContent&lt;/span&gt;, &lt;span class=&quot;nv&quot;&gt;$VarBegin&lt;/span&gt;,  &lt;span class=&quot;nv&quot;&gt;$VarEnd&lt;/span&gt; - &lt;span class=&quot;nv&quot;&gt;$VarBegin&lt;/span&gt; + 1&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+
+   &lt;span class=&quot;nv&quot;&gt;$VarName&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; StringStripWS&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$VarName&lt;/span&gt;,   &lt;span class=&quot;nv&quot;&gt;$STR_STRIPALL&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+   &lt;span class=&quot;nv&quot;&gt;$VarValueBegin&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; StringInStr&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$FileContent&lt;/span&gt;, &lt;span class=&quot;nv&quot;&gt;$VarName&lt;/span&gt;, &lt;span class=&quot;nv&quot;&gt;$STR_NOCASESENSE&lt;/span&gt;, 1, &lt;span class=&quot;nv&quot;&gt;$FirstCharacter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+   &lt;span class=&quot;nv&quot;&gt;$EqualSign&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; StringInStr&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$FileContent&lt;/span&gt;, &lt;span class=&quot;s1&quot;&gt;'='&lt;/span&gt;, &lt;span class=&quot;nv&quot;&gt;$STR_NOCASESENSE&lt;/span&gt;, 1, &lt;span class=&quot;nv&quot;&gt;$VarValueBegin&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+   &lt;span class=&quot;nv&quot;&gt;$ValueEnd&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; StringInStr&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$FileContent&lt;/span&gt;, @CRLF, &lt;span class=&quot;nv&quot;&gt;$STR_NOCASESENSE&lt;/span&gt;, 1, &lt;span class=&quot;nv&quot;&gt;$EqualSign&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+
+   &lt;span class=&quot;nv&quot;&gt;$Value&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; StringMid&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$FileContent&lt;/span&gt;, &lt;span class=&quot;nv&quot;&gt;$EqualSign&lt;/span&gt; + 1,&lt;span class=&quot;nv&quot;&gt;$ValueEnd&lt;/span&gt; - &lt;span class=&quot;nv&quot;&gt;$EqualSign&lt;/span&gt; + 1&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+   &lt;span class=&quot;nv&quot;&gt;$Value&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; Number&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$Value&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+
+   &lt;span class=&quot;nv&quot;&gt;$BranchStart&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'Case '&lt;/span&gt; &amp;amp; &lt;span class=&quot;nv&quot;&gt;$Value&lt;/span&gt;
+   &lt;span class=&quot;nv&quot;&gt;$BranchEnd&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'ExitLoop'&lt;/span&gt;
+
+   &lt;span class=&quot;nv&quot;&gt;$BranchStartPosition&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; StringInStr&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$FileContent&lt;/span&gt;, &lt;span class=&quot;nv&quot;&gt;$BranchStart&lt;/span&gt;, &lt;span class=&quot;nv&quot;&gt;$STR_NOCASESENSE&lt;/span&gt;, 1, &lt;span class=&quot;nv&quot;&gt;$Switch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; + StringLen&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$BranchStart&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+   &lt;span class=&quot;nv&quot;&gt;$BranchEndPosition&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; StringInStr&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$FileContent&lt;/span&gt;, &lt;span class=&quot;nv&quot;&gt;$BranchEnd&lt;/span&gt;, &lt;span class=&quot;nv&quot;&gt;$STR_NOCASESENSE&lt;/span&gt;, 1, &lt;span class=&quot;nv&quot;&gt;$BranchStartPosition&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+   &lt;span class=&quot;nv&quot;&gt;$Instruction&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; StringMid&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$FileContent&lt;/span&gt;, &lt;span class=&quot;nv&quot;&gt;$BranchStartPosition&lt;/span&gt;, &lt;span class=&quot;nv&quot;&gt;$BranchEndPosition&lt;/span&gt; - &lt;span class=&quot;nv&quot;&gt;$BranchStartPosition&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+
+   &lt;span class=&quot;nv&quot;&gt;$LastChar&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; StringInStr&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$FileContent&lt;/span&gt;, &lt;span class=&quot;s1&quot;&gt;'WEnd'&lt;/span&gt;, &lt;span class=&quot;nv&quot;&gt;$STR_NOCASESENSE&lt;/span&gt;, 1, &lt;span class=&quot;nv&quot;&gt;$BranchEndPosition&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; + StringLen&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'WEnd'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+   &lt;span class=&quot;nv&quot;&gt;$Find&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; StringMid&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$FileContent&lt;/span&gt;, &lt;span class=&quot;nv&quot;&gt;$VarValueBegin&lt;/span&gt;, &lt;span class=&quot;nv&quot;&gt;$LastChar&lt;/span&gt; - &lt;span class=&quot;nv&quot;&gt;$VarValueBegin&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+
+   &lt;span class=&quot;nv&quot;&gt;$FileContent&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; StringReplace&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$FileContent&lt;/span&gt;, &lt;span class=&quot;nv&quot;&gt;$Find&lt;/span&gt;, &lt;span class=&quot;nv&quot;&gt;$Instruction&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+   &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$VarValueBegin&lt;/span&gt; + StringLen&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$Instruction&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+EndFunc
+
+
+&lt;span class=&quot;nv&quot;&gt;$hFilehandle&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; FileOpen&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$sFileName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$Content&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; FileRead&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$hFileHandle&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+FileClose&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$hFileHandle&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;nv&quot;&gt;$Position&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 1
+While &lt;span class=&quot;nv&quot;&gt;$Position&lt;/span&gt; &amp;lt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; 0
+   &lt;span class=&quot;nv&quot;&gt;$Position&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; PerformDeobfuscation&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$Content&lt;/span&gt;, &lt;span class=&quot;nv&quot;&gt;$Position&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+Wend
+
+&lt;span class=&quot;nv&quot;&gt;$output&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; FileOpen&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$sOutputFileName&lt;/span&gt;, &lt;span class=&quot;nv&quot;&gt;$FO_OVERWRITE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+FileWrite&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$output&lt;/span&gt;, &lt;span class=&quot;nv&quot;&gt;$Content&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+FileClose&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$output&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;After some small manual edit (mainly to remove unused variables/functions), the script started to look good.&lt;/p&gt;
+
+&lt;h2 id=&quot;analysis---antidebug&quot;&gt;Analysis - Antidebug&lt;/h2&gt;
+&lt;p&gt;The malware has several kill-switch to complicate the analysis (not very effective if you can read the plain-text source code). The malware will exit if:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;COMPUTERNAME&lt;/code&gt; is &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;DESKTOP-QO5QU33&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;COMPUTERNAME&lt;/code&gt; is &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;NfZtFbPfH&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;COMPUTERNAME&lt;/code&gt; is &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;tz&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;COMPUTERNAME&lt;/code&gt; is &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ELICZ&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;File exist: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;C:\aaa_TouchMeNot_.txt&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;It is possible to ping: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;koBFsGVmqaNJBvEubZWGmaLtxgKmN.koBFsGVmqaNJBvEubZWGmaLtxgKmN&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Assuming &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;delta&lt;/code&gt; is the delta between two GetTickCount with a sleep in the middle, this condition is not respected: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;delta - 500 &amp;lt;= SleepMs &amp;lt;= delta + 500&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;If:&lt;/li&gt;
+&lt;/ul&gt;
+
+\[\sqrt{ (\sum_{n=0}^{42284070}(1/n^2)) * 6} &amp;gt; 3.141\]
+
+&lt;p&gt;I found this analysis of a similar malware &lt;a href=&quot;https://www.zscaler.com/blogs/security-research/cybergate-rat-and-redline-stealer-delivered-ongoing-autoit-malware-campaigns&quot;&gt;here&lt;/a&gt; which suggest &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;NfZtFbPfH&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;tz&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ELICZ&lt;/code&gt; are common names of commercial AV/Sandboxes, whilst &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;DESKTOP-QO5QU33&lt;/code&gt; could be the name of the author’s PC ¯ \_(ツ)_/¯.&lt;/p&gt;
+
+&lt;p&gt;The check with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;GetTickCount&lt;/code&gt; can help detect sandboxes since these environments are often hooking &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Sleep&lt;/code&gt; not to waste time during the analysis waiting for it. In this case, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;delta&lt;/code&gt;  will not be relatable to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;SleepMs&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;The last one is fun: the infinite sum converges to \(\frac{\pi^2}{6} \approx 1.6449\) and the result of the sum above should be very close. So, at the end, is checking if \(\sqrt{\frac{\pi^2}{6}\times6} = \pi &amp;gt; 3.141\). I can only guess this is related to some difference in floating-point instruction between a normal PC and commercial sandboxes.&lt;/p&gt;
+
+&lt;h2 id=&quot;analysis---behaviour&quot;&gt;Analysis - Behaviour&lt;/h2&gt;
+&lt;p&gt;It’s easy at this point to figure out the behavior of some of the functions:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rlosorgyvobzhliun&lt;/code&gt;: anti-debug function.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;tDQFdzMzJWonaRSNUVNfnZdcKaxNx&lt;/code&gt;: Get something from a c-like struct&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;IJzlfMsjjUAgSIaNXoCAh&lt;/code&gt;: Wrapper for &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;GetProcAddress&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;QFNJvesbypwxcgOBAIt&lt;/code&gt;: Wrapper for &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;VirtualProtect&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;KRYCFcgmvVbQHOKWFZ&lt;/code&gt;: Wrapper for &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;NtUnmapViewOfSection&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;So what is the script doing?
+At first, it is spawning another instance of the script, using a semaphore to coordinate the execution: the first one will exit at this point, the other will continue the script’s execution. I guess this is to complicate the debugging. Again, not very useful if you’re reading the source code.&lt;/p&gt;
+
+&lt;p&gt;In this second instance, the malware is loading the file &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Piu.xlxs&lt;/code&gt; in memory and then deleting &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Piu.xlxs&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;f&lt;/code&gt; (the script itself) to cover its traces.&lt;/p&gt;
+
+&lt;p&gt;At this point, it’s executing a binary payload, embedded in the script as an hex string. This binary exists in two variants, depending on the processor’s bits. This is the 32 bit version, for example:
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;89 C0 55 31 C0 57 56 53 83 EC 08 8B 4C 24 1C 8B 7C 24 20 C7 01 00 00 00 00 C7 41 04 00 00 00 00 88 44 01 08 83 C0 01 3D 00 01 00 00 75 F2 8D 91 00 01 00 00 31 DB 89 54 24 04 89 C8 31 D2 89 1C 24 89 CE EB 32 C7 04 24 01 00 00 00 31 ED 0F B6 48 08 0F B6 1C 2F 8D 2C 19 8D 54 15 00 0F B6 D2 0F B6 6C 16 08 89 EB 88 58 08 83 C0 01 88 4C 16 08 3B 44 24 04 74 12 8B 0C 24 39 4C 24 24 7E C5 8B 2C 24 83 04 24 01 EB C5 83 C4 08 5B 5E 5F 5D C2 10 00 89 DB 55 57 56 53 83 EC 08 8B 54 24 24 8B 44 24 1C 8B 6C 24 20 85 D2 8B 18 8B 48 04 7E 5B 31 D2 89 5C 24 04 89 2C 24 8B 5C 24 04 83 C3 01 81 E3 FF 00 00 00 89 5C 24 04 0F B6 74 18 08 8B 6C 24 04 8D 0C 0E 0F B6 C9 0F B6 7C 08 08 89 FB 88 5C 28 08 89 F3 8D 34 37 81 E6 FF 00 00 00 88 5C 08 08 0F B6 74 30 08 8B 3C 24 89 F3 30 1C 17 83 C2 01 3B 54 24 24 75 B0 89 EB 89 18 89 48 04 83 C4 08 5B 5E 5F 5D C2 10 00&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;It is made by two different assembly functions, separated by a placeholder:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;The first is starting at the beginning, right after &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;89 C0&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;The second begins after &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;89 DB&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The malware puts this binary inside a memory allocated with VirtualAlloc using the flag &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;PAGE_EXECUTE_READWRITE&lt;/code&gt; to later call the two functions.&lt;/p&gt;
+
+&lt;p&gt;The script calls them by using “&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CallWindowProc&lt;/code&gt; “for the 32-bit variant and by just invoking the pointer for the 64 bits variant. I’m not sure what the reason is; I guess it could be some limitation of AutoIt.&lt;/p&gt;
+
+&lt;p&gt;The actual calls in pseudocode would be similar to this:&lt;/p&gt;
+
+&lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;   &lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;PiuFileContent&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;...;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// Content of the file Piu.xlxs&lt;/span&gt;
+   &lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;PiuFileLenght&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;...;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// Lenght of the file Piu.xlxs&lt;/span&gt;
+   &lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;FirstBuffer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;272&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+   &lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;SecondBuffer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;0x68&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;0x06&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;0x15&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;0x11&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+   &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;SecondBufferLen&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+   &lt;span class=&quot;n&quot;&gt;First&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;FirstBuffer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;SecondBuffer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;SecondBufferLen&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+   &lt;span class=&quot;n&quot;&gt;Second&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;FirstBuffer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;PiuFileContent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;PiuFileLenght&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Where First and Second are respectively the First and the Second assembly function.
+Without decompiling them, it’s clear the malware is somehow decoding/decrypting the content of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Piu.xlxs&lt;/code&gt;. The content of SecondBuffer could be some Key but is not very interesting at this point.&lt;/p&gt;
+
+&lt;p&gt;The output is given in input to another function that has two parameters:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;The first is the output&lt;/li&gt;
+  &lt;li&gt;The second is &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;explorer.exe&lt;/code&gt; by default.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;It’s effortless at this point to understand where all of this is heading: process hollowing. This guess is made stronger by the fact that the function seems to embed a PE header parser.&lt;/p&gt;
+
+&lt;p&gt;Dumping the content of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;FirstBuffer&lt;/code&gt; after the call to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Second&lt;/code&gt; shows that indeed it is an exe file.&lt;/p&gt;
+
+&lt;h1 id=&quot;3---piuxlxs&quot;&gt;3 - Piu.xlxs&lt;/h1&gt;
+&lt;p&gt;After the AutoIt script successfully decodes &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Piu.xlxs&lt;/code&gt;, it injects its contents inside &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;explorer.exe&lt;/code&gt; and jumps into it.&lt;/p&gt;
+
+&lt;p&gt;It is a non-obfuscated 32 bits GUI application. Looking at imports and strings, making some educated guess about what the malware is doing is possible. A couple of things stand out:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;HTTP functions from wininet.dll&lt;/li&gt;
+  &lt;li&gt;Lots of strings related to SQLite: the exe is embedding the SQLite library&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CryptUnprotectData&lt;/code&gt; from crypt32&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The guess at this point is that the software is reading the SQLite DB of browsers to send login credentials (or cookies) to a website. Since this DB is encrypted so that only a logged user can read it (using &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CryptProtectData&lt;/code&gt; from crypt32), also finding &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CryptUnprotectData&lt;/code&gt; in the imports confirm this guess.&lt;/p&gt;
+
+&lt;p&gt;After decompiling the malware, it turns out the guess was correct, but there’s also a lot more.
+In details, the operations done by the malware are:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Copying sensitive data (cookies and passwords) from browsers. It support:
+    &lt;ul&gt;
+      &lt;li&gt;Brave Browser&lt;/li&gt;
+      &lt;li&gt;Chrome&lt;/li&gt;
+      &lt;li&gt;Firefox&lt;/li&gt;
+      &lt;li&gt;Opera&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Collecting general information on the PC:
+    &lt;ul&gt;
+      &lt;li&gt;Name&lt;/li&gt;
+      &lt;li&gt;CPU&lt;/li&gt;
+      &lt;li&gt;RAM&lt;/li&gt;
+      &lt;li&gt;GPU&lt;/li&gt;
+      &lt;li&gt;Installed software&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Capture a screenshot&lt;/li&gt;
+  &lt;li&gt;Collect *.txt files on desktop&lt;/li&gt;
+  &lt;li&gt;Collect wallets credentials from multiple wallets:
+    &lt;ul&gt;
+      &lt;li&gt;Waves Exchange&lt;/li&gt;
+      &lt;li&gt;Ledger Live&lt;/li&gt;
+      &lt;li&gt;Electrum&lt;/li&gt;
+      &lt;li&gt;ElectronCash&lt;/li&gt;
+      &lt;li&gt;Electrum-btcp&lt;/li&gt;
+      &lt;li&gt;Jaxx&lt;/li&gt;
+      &lt;li&gt;Exodus&lt;/li&gt;
+      &lt;li&gt;MultiBitHD&lt;/li&gt;
+      &lt;li&gt;Monero&lt;/li&gt;
+      &lt;li&gt;Exodus Eden&lt;/li&gt;
+      &lt;li&gt;Atomic&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Download additional malware&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;In the end, it collects all this information inside a .zip file to upload it on these two websites with a POST request:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;hxxp://fhjweheew21.top/index.php&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;hxxp://morteqabq02.top/index.php&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The last step is to download additional malware from &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;hxxp://ewsjaseq02.top/download.php?file=lv.exe&lt;/code&gt; and put it into &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;%Temp%\School.exe&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;A whois on these two domains shows that they are relatively new:
+&lt;img src=&quot;/assets/malware/whois.png&quot; alt=&quot;Whois&quot; class=&quot;center-image&quot; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;4---schoolexe&quot;&gt;4 - School.exe&lt;/h1&gt;
+&lt;p&gt;This file is a Nullsoft scriptable installer that contains three other executables and a VB script:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;name: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;School.exe&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;md5sum: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;6d1b332ccbfaa72d689719d83ca0d4ad&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;sha512: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;622cac4816b30c10d34f2def84d6df919bb283543fe5166a757f4de54c25a0c4b7ece0acc264b5dfa4d829cfbbb5d7d6388e29aeefbff22943eded27a73c7127&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;videocardvbs&quot;&gt;VideoCard.vbs&lt;/h2&gt;
+&lt;p&gt;This script takes the video card’s name and embeds it in the user-agent of an HTTP request to an IP logger website: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;hxxps://iplogger.org/1rUs77&lt;/code&gt;. My best guess is that the video card’s information can be used to identify PCs with a good graphic card to do cryptomining.&lt;/p&gt;
+
+&lt;h2 id=&quot;executable-files&quot;&gt;Executable files&lt;/h2&gt;
+&lt;p&gt;The installer is dropping other 4 files:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;4_ico.exe&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;6_ico.exe&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;vpn_ico.exe&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;All of them seems to be packed. Even if D.I.E. or other tools doesn’t seems to recognize it, it’s easy to figure out it’s Themida.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;To be continued&lt;/em&gt;&lt;/p&gt;
+</description>
+        <pubDate>Sat, 06 Feb 2021 00:00:00 +0100</pubDate>
+        <link>https://www.chaplinspace.com/2021/Unknown-Malware-Analysis/</link>
+        <guid isPermaLink="true">https://www.chaplinspace.com/2021/Unknown-Malware-Analysis/</guid>
+        
+        
+      </item>
     
       <item>
         <title>Setup dm-verity on a minimal Debian installation</title>
