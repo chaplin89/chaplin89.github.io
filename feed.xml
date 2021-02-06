@@ -5,8 +5,8 @@
     <description>Blog about hacking and other nasty things.</description>
     <link>https://www.chaplinspace.com/</link>
     <atom:link href="https://www.chaplinspace.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 06 Feb 2021 23:51:15 +0100</pubDate>
-    <lastBuildDate>Sat, 06 Feb 2021 23:51:15 +0100</lastBuildDate>
+    <pubDate>Sat, 06 Feb 2021 23:52:44 +0100</pubDate>
+    <lastBuildDate>Sat, 06 Feb 2021 23:52:44 +0100</lastBuildDate>
     <generator>Jekyll v3.9.0</generator>
     
       <item>
@@ -305,7 +305,7 @@ In details, the operations done by the malware are:&lt;/p&gt;
 &lt;p&gt;The last step is to download additional malware from &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;hxxp://ewsjaseq02.top/download.php?file=lv.exe&lt;/code&gt; and put it into &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;%Temp%\School.exe&lt;/code&gt;.&lt;/p&gt;
 
 &lt;p&gt;A whois on these two domains shows that they are relatively new:
-&lt;img src=&quot;/assets/malware/whois.png&quot; alt=&quot;Whois&quot; class=&quot;center-image&quot; /&gt;&lt;/p&gt;
+&lt;img src=&quot;/assets/images/malware/whois.png&quot; alt=&quot;Whois&quot; class=&quot;center-image&quot; /&gt;&lt;/p&gt;
 
 &lt;h1 id=&quot;4---schoolexe&quot;&gt;4 - School.exe&lt;/h1&gt;
 &lt;p&gt;This file is a Nullsoft scriptable installer that contains three other executables and a VB script:&lt;/p&gt;
