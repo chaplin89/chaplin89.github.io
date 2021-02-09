@@ -5,8 +5,8 @@
     <description>Blog about hacking and other nasty things.</description>
     <link>https://www.chaplinspace.com/</link>
     <atom:link href="https://www.chaplinspace.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 09 Feb 2021 10:38:40 +0100</pubDate>
-    <lastBuildDate>Tue, 09 Feb 2021 10:38:40 +0100</lastBuildDate>
+    <pubDate>Tue, 09 Feb 2021 10:44:15 +0100</pubDate>
+    <lastBuildDate>Tue, 09 Feb 2021 10:44:15 +0100</lastBuildDate>
     <generator>Jekyll v3.9.0</generator>
     
       <item>
@@ -196,7 +196,7 @@ FileClose&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&q
 
 &lt;p&gt;The check with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;GetTickCount&lt;/code&gt; can help detect sandboxes since these environments are often hooking &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Sleep&lt;/code&gt; not to waste time during the analysis waiting for it. In this case, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;delta&lt;/code&gt;  will not be relatable to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;SleepMs&lt;/code&gt;.&lt;/p&gt;
 
-&lt;p&gt;The last one is fun: the infinite sum converges to \(\frac{\pi^2}{6} \approx 1.6449\) and the result of the sum above should be very close. So, at the end, is checking if \(\sqrt{\frac{\pi^2}{6}*6} = \pi &amp;gt; 3.141\). I can only guess this is trying to detect different approximations in floating-points instructions between normal PCs and sandboxes or emulators. For example, I tried to execute this code in a python script and the script crashed with a “division by zero” error.&lt;/p&gt;
+&lt;p&gt;The last one is fun: the infinite sum converges to \(\frac{\pi^2}{6} \approx 1.6449\) and the result of the sum above should be very close to this number. So, at the end, is checking if \(\sqrt{\frac{\pi^2}{6}*6} = \pi &amp;gt; 3.141\). I can only guess this is trying to exploit different approximations in floating-points instructions between normal PCs and sandboxes or emulators to detect these last. For example, I tried to execute this code in a python script, and the script crashed with a “division by zero” error.&lt;/p&gt;
 
 &lt;h2 id=&quot;analysis---behaviour&quot;&gt;Analysis - Behaviour&lt;/h2&gt;
 &lt;p&gt;It’s easy at this point to figure out the behavior of some of the functions:&lt;/p&gt;
