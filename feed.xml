@@ -5,8 +5,8 @@
     <description>Blog about hacking and other nasty things.</description>
     <link>https://www.chaplinspace.com/</link>
     <atom:link href="https://www.chaplinspace.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 08 Feb 2021 13:00:07 +0100</pubDate>
-    <lastBuildDate>Mon, 08 Feb 2021 13:00:07 +0100</lastBuildDate>
+    <pubDate>Tue, 09 Feb 2021 10:38:40 +0100</pubDate>
+    <lastBuildDate>Tue, 09 Feb 2021 10:38:40 +0100</lastBuildDate>
     <generator>Jekyll v3.9.0</generator>
     
       <item>
@@ -175,7 +175,7 @@ FileWrite&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&q
 FileClose&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$output&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;After some small manual edit (mainly to remove unused variables/functions), the script started to look good.&lt;/p&gt;
+&lt;p&gt;After some small manual edit (mainly to remove unused variables/functions), the script started to look good. Inside the .zip folder, under &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;3. Temp Folder\f_deob_manual.au3&lt;/code&gt; it is possible to see the deobfuscated version of the script.&lt;/p&gt;
 
 &lt;h2 id=&quot;analysis---antidebug&quot;&gt;Analysis - Antidebug&lt;/h2&gt;
 &lt;p&gt;The malware has several kill-switch to complicate the analysis (not very effective if you can read the plain-text source code). The malware will exit if:&lt;/p&gt;
@@ -196,7 +196,7 @@ FileClose&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&q
 
 &lt;p&gt;The check with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;GetTickCount&lt;/code&gt; can help detect sandboxes since these environments are often hooking &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Sleep&lt;/code&gt; not to waste time during the analysis waiting for it. In this case, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;delta&lt;/code&gt;  will not be relatable to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;SleepMs&lt;/code&gt;.&lt;/p&gt;
 
-&lt;p&gt;The last one is fun: the infinite sum converges to \(\frac{\pi^2}{6} \approx 1.6449\) and the result of the sum above should be very close. So, at the end, is checking if \(\sqrt{\frac{\pi^2}{6}*6} = \pi &amp;gt; 3.141\). I can only guess this is related to some difference in floating-point instruction between a normal PC and commercial sandboxes.&lt;/p&gt;
+&lt;p&gt;The last one is fun: the infinite sum converges to \(\frac{\pi^2}{6} \approx 1.6449\) and the result of the sum above should be very close. So, at the end, is checking if \(\sqrt{\frac{\pi^2}{6}*6} = \pi &amp;gt; 3.141\). I can only guess this is trying to detect different approximations in floating-points instructions between normal PCs and sandboxes or emulators. For example, I tried to execute this code in a python script and the script crashed with a “division by zero” error.&lt;/p&gt;
 
 &lt;h2 id=&quot;analysis---behaviour&quot;&gt;Analysis - Behaviour&lt;/h2&gt;
 &lt;p&gt;It’s easy at this point to figure out the behavior of some of the functions:&lt;/p&gt;
@@ -302,7 +302,7 @@ In details, the operations done by the malware are:&lt;/p&gt;
   &lt;li&gt;Download additional malware&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;In the end, it collects all this information inside a .zip file to upload it on these two websites with a POST request:&lt;/p&gt;
+&lt;p&gt;In the end, it collects all this information inside a .zip file to upload it on these two websites with a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;POST&lt;/code&gt; request:&lt;/p&gt;
 &lt;ul&gt;
   &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;hxxp://fhjweheew21.top/index.php&lt;/code&gt;&lt;/li&gt;
   &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;hxxp://morteqabq02.top/index.php&lt;/code&gt;&lt;/li&gt;
@@ -310,7 +310,7 @@ In details, the operations done by the malware are:&lt;/p&gt;
 
 &lt;p&gt;The last step is to download additional malware from &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;hxxp://ewsjaseq02.top/download.php?file=lv.exe&lt;/code&gt; and put it into &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;%Temp%\School.exe&lt;/code&gt;.&lt;/p&gt;
 
-&lt;p&gt;A whois on these two domains shows that they are relatively new:
+&lt;p&gt;A &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;whois&lt;/code&gt; on these two domains shows that they are relatively new:
 &lt;img src=&quot;/assets/images/malware/whois.png&quot; alt=&quot;Whois&quot; class=&quot;center-image&quot; /&gt;&lt;/p&gt;
 
 &lt;h1 id=&quot;4---schoolexe&quot;&gt;4 - School.exe&lt;/h1&gt;
@@ -322,7 +322,7 @@ SHA512: 622cac4816b30c10d34f2def84d6df919bb283543fe5166a757f4de54c25a0c4b7ece0ac
 IoC: %Temp%\Pecado
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;h2 id=&quot;videocardvbs&quot;&gt;VideoCard.vbs&lt;/h2&gt;
-&lt;p&gt;This script takes the video card’s name and embeds it in the user-agent of an HTTP request to an IP logger website: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;hxxps://iplogger.org/1rUs77&lt;/code&gt;. My best guess is that the video card’s information can be used to identify PCs with a good graphic card to do cryptomining.&lt;/p&gt;
+&lt;p&gt;This script takes the video card’s name and embeds it in the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;user-agent&lt;/code&gt; of an HTTP request to an IP logger website: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;hxxps://iplogger.org/1rUs77&lt;/code&gt;. My best guess is that the video card’s information can be used to identify PCs with a good graphic card to do cryptomining.&lt;/p&gt;
 
 &lt;h2 id=&quot;executable-files&quot;&gt;Executable files&lt;/h2&gt;
 &lt;p&gt;The installer is dropping other 4 files:&lt;/p&gt;
@@ -332,9 +332,15 @@ IoC: %Temp%\Pecado
   &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;vpn_ico.exe&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;All of them seems to be packed. Even if D.I.E. or other tools doesn’t seems to recognize it, it’s easy to figure out it’s Themida.&lt;/p&gt;
+&lt;p&gt;All of them seems to be packed. Even if D.I.E. or other tools doesn’t seems to recognize it, it’s easy to figure out it’s Themida, and it’s easy to figure out they were packed at least with the following options enabled:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Anti-debugger detection&lt;/li&gt;
+  &lt;li&gt;Advanced api-wrapping&lt;/li&gt;
+  &lt;li&gt;Detect file/registry monitors&lt;/li&gt;
+  &lt;li&gt;Entry point virtualization&lt;/li&gt;
+&lt;/ul&gt;
 
-&lt;p&gt;My best guess is that this additional malware is some kind of backdoor that is usued by the author to do cryptomining or other GPU intensive application, but this could be the topic for another post.&lt;/p&gt;
+&lt;p&gt;My best guess is that this additional malware is some kind of backdoor that could be used by the author to do cryptomining or other GPU intensive application, but this could be the topic for another post.&lt;/p&gt;
 
 &lt;p&gt;&lt;em&gt;&lt;center&gt;To be continued&lt;/center&gt;&lt;/em&gt;&lt;/p&gt;
 </description>
