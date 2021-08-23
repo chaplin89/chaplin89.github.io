@@ -21,7 +21,8 @@ $primary-color: #000;
 $action-color: $primary-color;
 $white-color: #fff;
 $black-color: #000;
-$blue-color: #0086B3;
+//$blue-color: #0086B3;
+$blue-color: #005580;
 $dark-gray-color: #333;
 $medium-gray-color: #999;
 $light-gray-color: #ccc;
@@ -34,7 +35,7 @@ $base-border-color: $light-gray-color;
 $base-border: 1px solid $base-border-color;
 
 // Background Colors
-$base-background-color: $white-color;
+$base-background-color: #fcfcfc;
 $secondary-background-color: tint($base-border-color, 80%);
 
 // Forms

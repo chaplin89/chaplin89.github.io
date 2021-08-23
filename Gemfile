@@ -6,6 +6,8 @@ group :jekyll_plugins do
     gem "jekyll-paginate"
     gem 'jekyll-toc'
 end
+gem 'kramdown-parser-gfm'
+gem "guard-livereload"
 gem 'html-proofer'
 gem 'tzinfo'
 gem 'tzinfo-data'

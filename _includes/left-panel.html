@@ -1,0 +1,33 @@
+<div class="left">
+  <header class="site-header">
+    <div class="container">
+        <h1 class="logo"><a
+            href="{{ '/' | prepend: site.baseurl | prepend: site.url }}">{{ site.title_left }}<span>{{ site.title_right }}</span></a>
+        </h1>
+
+      <nav class="navbar">
+        <ul>
+          <a href="{{ '/' | prepend: site.baseurl | prepend: site.url }}">
+            <li>Home</li>
+          </a>
+          <a href="{{ '/about' | prepend: site.baseurl | prepend: site.url }}">
+            <li>About me</li>
+          </a>
+          <a href="{{ "/feed.xml" | prepend: site.baseurl | prepend: site.url }}" target="_blank">
+            <li>RSS</li>
+          </a>
+        </ul>
+      </nav>
+      <div class="intro">
+        <p class="lead">Hi, I'm Marco and this blog talks about hacking and other nasty things.</p>
+        <a class="social" href="https://www.github.com/chaplin89"><i class="fab fa-github"></i></a>
+        <a class="social" href="https://www.twitter.com/chaplinspace"><i class="fab fa-twitter"></i></a>
+        <div class="donation">
+          <a href="https://www.savethechildren.org/us/about-us/why-save-the-children">
+            Did I help? Click here to know what to do.
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+</div>
