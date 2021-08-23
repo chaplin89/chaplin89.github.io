@@ -50,7 +50,7 @@ mkdir new_boot
 mount /dev/sdb1 ./new_boot
 # Copy the content from /boot to ./new_boot, preserving permissions
 cp -rp /boot/* ./new_boot/
-# Appent the output of blkid /dev/sdb1 (containing the UUID of /dev/sdb1) to /etc/fstab
+# Append the output of blkid /dev/sdb1 (containing the UUID of /dev/sdb1) to /etc/fstab
 blkid /dev/sdb1 >> /etc/fstab
 # Modify /etc/fstab to create a proper entry with this UUID
 vim /etc/fstab
@@ -98,9 +98,8 @@ It is possible to do this in 2 ways:
 
 1. By altering the script /init of the initramfs to make it configure the mapper
 2. By specifying a parameter to the kernel that will instruct the kernel to do everything by itself
-It is needed to recompile the component in both cases since, by default, neither busybox nor the kernel on a plain Debian 10 installation supports what is required to create the device.
 
-The most straightforward solution is to recompile the kernel. In the tutorial, this is the method that will be used.
+It is needed to recompile the component in both cases since, by default, neither busybox nor the kernel on a plain Debian 10 installation supports what is required to create the device.
 
 The kernel needs to be upgraded from the version 4.* that Debian 10 is using since the option that is needed is available starting from Linux 5.1. It is possible to upgrade the kernel by adding the backport repository to APT.
 
@@ -180,7 +179,7 @@ cd home
 unsquashfs ./root.squashfs
 # Edit fstab to make it mount the squashfs partition as root
 vim ./home/squashfs-root/etc/fstab
-The squashfs image needs to be flashed somewhere. This place can be /dev/sda1, but, in this case, if there are some mistakes, the system won't boot anymore. Another solution is to create and plug another disk.
+# The squashfs image needs to be flashed somewhere. This place can be /dev/sda1, but, in this case, if there are some mistakes, the system won't boot anymore. Another solution is to create and plug another disk.
 ```
 
 Supposing the chosen disk where to flash the image is ```/dev/sda1```, fstab will look like this:
@@ -222,6 +221,7 @@ There are two possible approaches to enable dm-verity:
 
 1. The first is with the use of dmsetup, a tool used to create a mapper device. Since it is possible to use a mapper for different purposes, this tool is not specific for dm-verity and must be invoked in a certain way to enable the usage of dm-verity.
 2. The second is with the use of veritysetup, which is a more high-level tool that can configure a device-mapper device that is specific for dm-verity. Under the hood is doing the same thing as dmsetup, but it's easier to use since it's made for dmverity.
+
 This tutorial will use the second approach.
 
 Mount a writable partition as general-purpose storage, for example, the ```/home``` partition (it will be needed later):
