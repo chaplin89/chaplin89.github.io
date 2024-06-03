@@ -2,8 +2,8 @@
 title_left    : "chaplin"
 title_right   : "space"
 description   : "Blog about hacking and other nasty things."
-keywords      : "hacking, reverse-engineering, coding, programming, hardware, firmware"
-url           : https://chaplin89.githubcom
+keywords      : "hacking, reverse-engineering, coding, programming"
+url           : https://chaplin89.github.io
 baseurl       : ""
 cover         : "" # image uri like logo/cover image for site seo
 
