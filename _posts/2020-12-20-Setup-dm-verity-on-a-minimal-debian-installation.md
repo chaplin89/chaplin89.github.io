@@ -4,7 +4,7 @@ title: 'Setup dm-verity on a minimal Debian installation'
 comments: true
 toc: true
 ---
-DM-verity is technology (or better, a "device-mapper target") that provides integrity checking on block devices using a cryptographic digest supplied by the kernel crypto API.
+DM-verity is a technology (or better, a "device-mapper target") that provides integrity checking on block devices using a cryptographic digest supplied by the kernel crypto API.
 
 # 1 - System installation
 To make dm-verity works, the system should be able to work with a read-only root. 
