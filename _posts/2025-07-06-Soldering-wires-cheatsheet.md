@@ -1,5 +1,4 @@
-# Soldering wires cheatsheet
-This is mostly made for myself as I wanted these information in a single page and in an easily accessible place. Don't take it as the bible. I'm not a pro (by no means).
+**Important note**: This is mostly made for myself as I wanted these information in a single page and in an easily accessible place. Don't take it as the bible. I'm not a pro (by no means).
 
 ## Properties
 The main properties of the soldering wire are:
