@@ -11,3 +11,4 @@ gem "guard-livereload"
 gem 'html-proofer'
 gem 'tzinfo'
 gem 'tzinfo-data'
+gem 'base64'
