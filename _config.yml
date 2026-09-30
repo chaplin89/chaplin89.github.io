@@ -7,7 +7,7 @@ url           : https://chaplin89.github.io
 baseurl       : ""
 cover         : "" # image uri like logo/cover image for site seo
 
-google_analytics  : UA-141216446-1
+goatcounter       : chaplin
 twitter_username  : "chaplinspace"
 comments_enabled  : true # if enabled (set to true), please provide your disqus_username
 disqus_shortname  : "chaplin89-github-io"
