@@ -1,0 +1,93 @@
+<p><strong>Important note</strong>: This is mostly made for myself as I wanted these information in a single page and in an easily accessible place. Don’t take it as the bible. I’m not a pro (by no means).</p>
+
+<h2 id="properties">Properties</h2>
+<p>The main properties of the soldering wire are:</p>
+<ol>
+  <li><strong>Melting temperature</strong>. Sometimes lower is better, sometimes higher is better.</li>
+  <li><strong>Is an eutectic alloy?</strong> Does it melt at a specific, single temperature or it has a so called “plastic range”? You most definitely want the first in when working with electronic.</li>
+  <li><strong>Does it have lead?</strong> Lead is toxic if you ingest it, which can happen by mistake even if you’re not Ralph Wiggum.</li>
+  <li><strong>Wettability/Flow</strong>. How easy it “sticks” to the thing you want to solder?</li>
+  <li><strong>Strenght</strong>. how easy it is to break the joint under mechanical or thermal fatigue?</li>
+  <li><strong>How big is the wire?</strong> Bigger wires are used on bigger joints. More thermal mass, more heat required to melt.</li>
+  <li><strong>What chemical components are inside?</strong> Each of them bring unique properties to the alloy. Alloys are usually expressed with their chemical element followed by the percentage. Sn63/Pb37 means 63% of Tin (Sn) and 37% of Lead (Pb).</li>
+  <li><strong>Core</strong>. The core of the wire may or may not contain flux, which usually make soldering easier.</li>
+</ol>
+
+<h2 id="elements">Elements</h2>
+<p>As said, each element introduce unique properties and the same elements mixed in different ratios can also create alloys with different properties.
+ Rather than learning the individual properties of each alloy, is important to understand the general properties of each elements to be able to orient yourself when buying a soldering wire. These are the most common elements.</p>
+<ol>
+  <li><strong>Sn: Tin</strong>. The primary component. The “glue” to create bonds. 232C melting point.</li>
+  <li><strong>Pb: Lead</strong>. Lower the melting temperature (e.g., 183C for Sn63/Pb37) and increase strength. Health and environmental risks.</li>
+  <li><strong>Ag: Silver</strong>. Lower the melting temperature, increase strength, wettability. Often mixed with Cu (so-called SAC alloys). Expensive.</li>
+  <li><strong>Cu: Copper</strong>. Help preserving the copper from the PCB and the iron tip. Very cheap. Brittle if used alone with Sn.</li>
+  <li><strong>Bi: Bismuth</strong>. Significantly lower the melting point (e.g., 138C for Sn42/Bi58). Excellent for heat-sensitive components. Very brittle. Not to be used as an alternetive of lead, expecially to prepare a pad for wicking. Even for small amounts of Bi, when it’s mixed with other alloys it can melt at dangerously low temperatures (even 96C for leaded alloys).</li>
+  <li><strong>Sb: Antimony</strong>. Increase strength and slightly improve the wettability.</li>
+  <li><strong>In: Indium</strong>. For extremely low temperatures. Increase strength. Expensive.</li>
+  <li><strong>Zn: Zinc</strong>. Lower melting temperature (e.g., 199C for eutectic Sn-Zn alloy). Only recommended for Aluminium. Oxidise very easily. Require special flux.</li>
+</ol>
+
+<h2 id="most-common-alloys">Most common alloys</h2>
+
+<p>As mentioned, there are a lot of possibilities when it comes to alloy. The following are the most common one. This is by no means a comprehensive list. Some websites list more than 50 alloys.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Alloy (Composition)</th>
+      <th style="text-align: left">Melting Temp.</th>
+      <th style="text-align: left">Eutectic?</th>
+      <th style="text-align: left">Ease of Work (1-5, 5=easiest)</th>
+      <th style="text-align: left">Strength (1-5, 5=strongest)</th>
+      <th style="text-align: left">Costs (relative)</th>
+      <th style="text-align: left">Other Peculiar Properties / Disadvantages</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">Sn63/Pb37</td>
+      <td style="text-align: left">$183^\circ C$</td>
+      <td style="text-align: left">Yes</td>
+      <td style="text-align: left"><strong>5</strong> - Melts/solidifies sharply, excellent flow &amp; wettability, shiny joints. Very forgiving.</td>
+      <td style="text-align: left"><strong>4</strong> - Very good strength, ductility, and fatigue resistance for general use.</td>
+      <td style="text-align: left">Low</td>
+      <td style="text-align: left"><strong>Contains lead (toxic, regulated).</strong> Excellent for general electronics, reliable. Suppresses tin whiskers.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">SAC305 (Sn96.5/Ag3.0/Cu0.5)</td>
+      <td style="text-align: left">$217^\circ C - 221^\circ C$</td>
+      <td style="text-align: left">Near-Eutectic</td>
+      <td style="text-align: left"><strong>3</strong> - Higher melting point requires more heat. Joints can be dull/grainy, harder to visually inspect. Flow is good but less “forgiving” than leaded.</td>
+      <td style="text-align: left"><strong>4</strong> - Good strength, creep resistance, and thermal fatigue resistance. Strongest common lead-free.</td>
+      <td style="text-align: left">Medium-High</td>
+      <td style="text-align: left">Most common lead-free. Silver content improves strength &amp; wettability. More brittle than leaded.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Sn99.3/Cu0.7</td>
+      <td style="text-align: left">$227^\circ C$</td>
+      <td style="text-align: left">Yes</td>
+      <td style="text-align: left"><strong>3</strong> - Higher melting point. Joints can be dull. Good flow but slightly less robust wetting than SAC. Can be aggressive on copper tips.</td>
+      <td style="text-align: left"><strong>3</strong> - Good strength, but generally less robust thermal fatigue resistance than SAC.</td>
+      <td style="text-align: left">Low</td>
+      <td style="text-align: left">Cost-effective lead-free. Can be aggressive on copper features if soldering parameters aren’t optimized.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Sn42/Bi58 (e.g., Sn42/Bi50/Cu8)</td>
+      <td style="text-align: left">$138^\circ C$</td>
+      <td style="text-align: left">Yes ($138^\circ C$ for Sn42/Bi58)</td>
+      <td style="text-align: left"><strong>3</strong> - Very low melting point is easy on sensitive components. Requires lower iron temps.</td>
+      <td style="text-align: left"><strong>2</strong> - <strong>Highly brittle.</strong> Very poor mechanical shock and thermal fatigue resistance.</td>
+      <td style="text-align: left">Medium</td>
+      <td style="text-align: left"><strong>Ultra-low melting point.</strong> <strong>Critically risky to mix with leaded solder (forms $~96^\circ C$ alloy) or other lead-free solders (forms lower-melt, brittle alloys).</strong> Not for high-reliability/vibration.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Sn91/Zn9</td>
+      <td style="text-align: left">$199^\circ C$</td>
+      <td style="text-align: left">Yes</td>
+      <td style="text-align: left"><strong>2</strong> - Prone to heavy oxidation/dross in air. Requires aggressive fluxes. Can be challenging to get good flow.</td>
+      <td style="text-align: left"><strong>3</strong> - Good strength but prone to corrosion in humid environments.</td>
+      <td style="text-align: left">Low</td>
+      <td style="text-align: left"><strong>Excellent for soldering aluminum.</strong> Poor oxidation resistance (requires N2 or strong flux). Prone to corrosion.</td>
+    </tr>
+  </tbody>
+</table>

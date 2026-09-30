@@ -135,3 +135,8 @@ dl {
     list-style-position: outside;
     list-style-image: none;
 }
+
+li > ul,
+li > ol {
+    margin-bottom: 0;
+}

@@ -21,7 +21,7 @@ As said, each element introduce unique properties and the same elements mixed in
 5. **Bi: Bismuth**. Significantly lower the melting point (e.g., 138C for Sn42/Bi58). Excellent for heat-sensitive components. Very brittle. Not to be used as an alternetive of lead, expecially to prepare a pad for wicking. Even for small amounts of Bi, when it's mixed with other alloys it can melt at dangerously low temperatures (even 96C for leaded alloys).
 6. **Sb: Antimony**. Increase strength and slightly improve the wettability.
 7. **In: Indium**. For extremely low temperatures. Increase strength. Expensive.
-6. **Zn: Zinc**. Lower melting temperature (e.g., 199C for eutectic Sn-Zn alloy). Can bond very well to Aluminum. Require special flux.
+6. **Zn: Zinc**. Lower melting temperature (e.g., 199C for eutectic Sn-Zn alloy). Only recommended for Aluminium. Oxidise very easily. Require special flux.
 
 ## Most common alloys
 
