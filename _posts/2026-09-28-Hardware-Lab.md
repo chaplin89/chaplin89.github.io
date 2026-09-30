@@ -89,10 +89,17 @@ I went with [the latter](https://de.aliexpress.com/item/1005009665404796.html). 
 ## Other equipment
 
 This is the rest of the equipment I currently have, mostly in the cabinet on the left under the desk (no affiliate links, I'm not famous enough):
-- [Rigol DHO924S](https://www.amazon.de/-/en/RIGOL-DHO924S-Oscilloscope-Generator-1-25GSa/dp/B0CGHTLRHS) oscilloscope. 250MHz, 4 analog, 16 digital, 12 bits, 1.25GSa/s. I love the fact it's running on Android (although I believe it's Android 7, so I don't have any plans to connect it to the network) and that it's completely unlocked.
+- [Rigol DHO924S](https://www.amazon.de/-/en/RIGOL-DHO924S-Oscilloscope-Generator-1-25GSa/dp/B0CGHTLRHS) oscilloscope. 250MHz, 4 analog, 16 digital, 12 bits, 1.25GSa/s. I love the fact it's running on Android (although I believe it's Android 7, so I don't have any plans to connect it to the network) and that it's completely unlocked with the SoC download mode enabled (so it's basically unbrickable).
 - [Quick 862DW+](https://www.amazon.de/-/en/Soldering-Sensor-Controlled-Digitally-Adjustable-Memories/dp/B0D2RNDKL5/) hot air station. Super powerful, does its job, 10/10
 - A random Chinese programmable power supply like [this](https://www.amazon.de/-/en/Laboratory-Adjustable-4-Digit-Display-Adjustment/dp/B09C8LWV9W/)
 - [Pinecil v2](https://pine64.org/documentation/Pinecil/) with a bunch of microsoldering tips (e.g., [this](https://www.aliexpress.com/item/1005010804667333.html))
 - [200W GaN 8-port](https://www.amazon.de/-/en/dp/B0DZ2KRH43) power supply on the back of the desk to power everything
 - [PinePower desktop](https://pine64.org/devices/pinepower_desktop/) on the left under the desk, near the drawers
 - [CPB heated mat](https://www.amazon.de/-/en/MMOBIEL-Screen-Heating-Smartphone-Separator/dp/B09Z2TSZ99). It's made mostly for smartphone repair and frankly it became a bit useless since I got my Quick, but I still find it pretty useful for pre-heating and it takes way less space than a full-blown pre-heater.
+
+## Future improvements
+
+The next big improvements I'd like to make in the coming months are:
+- A bench multimeter [like this](https://de.aliexpress.com/item/1005004613518258.html)
+- A proper 3-stage fume extractor
+- An ultrasonic cleaner
