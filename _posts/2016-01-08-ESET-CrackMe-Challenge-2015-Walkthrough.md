@@ -2,8 +2,10 @@
 layout: post
 title: ESET CrackMe Challenge 2015 - Walkthrough
 comments: true
-toc: true
 ---
+
+* TOC
+{:toc}
 
 -------
 *Repo for the project: 

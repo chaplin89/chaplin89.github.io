@@ -2,8 +2,10 @@
 layout: post
 title: Hardware Lab
 comments: true
-toc: true
 ---
+
+* TOC
+{:toc}
 
 Lately I've been working a lot to improve my small hardware lab in my studio. The biggest change is the addition of an optical microscope. Here's what it currently looks like, followed by a breakdown of what I have.
 

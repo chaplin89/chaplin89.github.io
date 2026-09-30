@@ -3,61 +3,52 @@
   <channel>
     <title></title>
     <description>Blog about hacking and other nasty things.</description>
-    <link>https://chaplin89.github.io/</link>
-    <atom:link href="https://chaplin89.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 30 Sep 2026 06:32:44 +0200</pubDate>
-    <lastBuildDate>Wed, 30 Sep 2026 06:32:44 +0200</lastBuildDate>
+    <link>http://localhost:4000/</link>
+    <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Wed, 30 Sep 2026 17:42:28 +0200</pubDate>
+    <lastBuildDate>Wed, 30 Sep 2026 17:42:28 +0200</lastBuildDate>
     <generator>Jekyll v3.10.0</generator>
     
       <item>
         <title>Hardware Lab</title>
-        <description>&lt;p&gt;Lately I’ve been working a lot to improve my small hardware lab in my studio. The biggest change is the addition of an optical microscope. Here’s what it currently looks like, followed by a breakdown of what I have.&lt;/p&gt;
-
+        <description>
 </description>
         <pubDate>Mon, 28 Sep 2026 00:00:00 +0200</pubDate>
-        <link>https://chaplin89.github.io/2026/Hardware-Lab/</link>
-        <guid isPermaLink="true">https://chaplin89.github.io/2026/Hardware-Lab/</guid>
+        <link>http://localhost:4000/2026/Hardware-Lab/</link>
+        <guid isPermaLink="true">http://localhost:4000/2026/Hardware-Lab/</guid>
         
         
       </item>
     
       <item>
-        <title>Soldering Wires Cheatsheet</title>
-        <description>&lt;p&gt;&lt;strong&gt;Important note&lt;/strong&gt;: This is mostly made for myself as I wanted these information in a single page and in an easily accessible place. Don’t take it as the bible. I’m not a pro (by no means).&lt;/p&gt;
-
+        <title>Solder wire cheatsheet</title>
+        <description>
 </description>
         <pubDate>Sun, 06 Jul 2025 00:00:00 +0200</pubDate>
-        <link>https://chaplin89.github.io/2025/Soldering-wires-cheatsheet/</link>
-        <guid isPermaLink="true">https://chaplin89.github.io/2025/Soldering-wires-cheatsheet/</guid>
+        <link>http://localhost:4000/2025/Soldering-wires-cheatsheet/</link>
+        <guid isPermaLink="true">http://localhost:4000/2025/Soldering-wires-cheatsheet/</guid>
         
         
       </item>
     
       <item>
         <title>Unknown malware analysis</title>
-        <description>&lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;
-&lt;p&gt;This post is about a malware I analyzed in the last few days:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;/assets/files/malware.7z&quot;&gt;Sample and IDA Db&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Password: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;infected&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
+        <description>
 </description>
         <pubDate>Sat, 06 Feb 2021 00:00:00 +0100</pubDate>
-        <link>https://chaplin89.github.io/2021/Unknown-Malware-Analysis/</link>
-        <guid isPermaLink="true">https://chaplin89.github.io/2021/Unknown-Malware-Analysis/</guid>
+        <link>http://localhost:4000/2021/Unknown-Malware-Analysis/</link>
+        <guid isPermaLink="true">http://localhost:4000/2021/Unknown-Malware-Analysis/</guid>
         
         
       </item>
     
       <item>
         <title>Setup dm-verity on a minimal Debian installation</title>
-        <description>&lt;p&gt;DM-verity is a technology (or better, a “device-mapper target”) that provides integrity checking on block devices using a cryptographic digest supplied by the kernel crypto API.&lt;/p&gt;
-
+        <description>
 </description>
         <pubDate>Sun, 20 Dec 2020 00:00:00 +0100</pubDate>
-        <link>https://chaplin89.github.io/2020/Setup-dm-verity-on-a-minimal-debian-installation/</link>
-        <guid isPermaLink="true">https://chaplin89.github.io/2020/Setup-dm-verity-on-a-minimal-debian-installation/</guid>
+        <link>http://localhost:4000/2020/Setup-dm-verity-on-a-minimal-debian-installation/</link>
+        <guid isPermaLink="true">http://localhost:4000/2020/Setup-dm-verity-on-a-minimal-debian-installation/</guid>
         
         
       </item>
@@ -68,22 +59,19 @@
 
 </description>
         <pubDate>Thu, 30 May 2019 00:00:00 +0200</pubDate>
-        <link>https://chaplin89.github.io/2019/Car-hacking-101/</link>
-        <guid isPermaLink="true">https://chaplin89.github.io/2019/Car-hacking-101/</guid>
+        <link>http://localhost:4000/2019/Car-hacking-101/</link>
+        <guid isPermaLink="true">http://localhost:4000/2019/Car-hacking-101/</guid>
         
         
       </item>
     
       <item>
         <title>ESET CrackMe Challenge 2015 - Walkthrough</title>
-        <description>&lt;hr /&gt;
-&lt;p&gt;&lt;em&gt;Repo for the project: 
-&lt;a href=&quot;https://github.com/chaplin89/challenges&quot;&gt;https://github.com/chaplin89/challenges&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-
+        <description>
 </description>
         <pubDate>Fri, 08 Jan 2016 00:00:00 +0100</pubDate>
-        <link>https://chaplin89.github.io/2016/ESET-CrackMe-Challenge-2015-Walkthrough/</link>
-        <guid isPermaLink="true">https://chaplin89.github.io/2016/ESET-CrackMe-Challenge-2015-Walkthrough/</guid>
+        <link>http://localhost:4000/2016/ESET-CrackMe-Challenge-2015-Walkthrough/</link>
+        <guid isPermaLink="true">http://localhost:4000/2016/ESET-CrackMe-Challenge-2015-Walkthrough/</guid>
         
         
       </item>
